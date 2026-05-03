@@ -1,5 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- 0. Cinematic Preloader Logic ---
+    const preloader = document.getElementById('preloader');
+    
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            preloader.classList.add('fade-out');
+            // Enable scrolling after preloader is gone
+            document.body.style.overflowY = 'auto';
+        }, 1500); // Minimum duration for cinematic effect
+    });
+
+    // Disable scroll while preloader is active
+    document.body.style.overflowY = 'hidden';
+    
     // --- 1. Enhanced Section Reveal (Intersection Observer) ---
     const revealOptions = {
         threshold: 0.15,
@@ -21,36 +35,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. Custom Luxury Cursor ---
     const dot = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');
+    const blobs = document.querySelectorAll('.blob');
     
     let mouseX = 0;
     let mouseY = 0;
     let outlineX = 0;
     let outlineY = 0;
+    let isInteracting = false;
 
+    // Use a single mousemove listener for everything related to mouse position
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
+        // Check for interactive elements only if mouse moves (can be throttled)
+        if (!isInteracting) {
+            const target = e.target;
+            const isHovering = target.closest('a, button, .skill-tag, .contact-link, .glass-card');
+            
+            if (isHovering) {
+                dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                outline.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                outline.style.borderColor = 'var(--gold-glow)';
+            } else {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                outline.style.transform = 'translate(-50%, -50%) scale(1)';
+                outline.style.borderColor = 'var(--gold)';
+            }
+        }
+    }, { passive: true });
+
+    // Smooth animation loop for cursor and blobs
+    const animate = () => {
+        // Dot follows exactly
         dot.style.left = `${mouseX}px`;
         dot.style.top = `${mouseY}px`;
-        
-        // Check for interactive elements
-        const target = e.target;
-        const isInteractive = target.closest('a, button, .skill-tag, .contact-link, .glass-card');
-        
-        if (isInteractive) {
-            dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            outline.style.transform = 'translate(-50%, -50%) scale(1.8)';
-            outline.style.borderColor = 'var(--gold-glow)';
-        } else {
-            dot.style.transform = 'translate(-50%, -50%) scale(1)';
-            outline.style.transform = 'translate(-50%, -50%) scale(1)';
-            outline.style.borderColor = 'var(--gold)';
-        }
-    });
 
-    // Smooth outline follow
-    const animateCursor = () => {
+        // Outline follows with lag
         const distX = mouseX - outlineX;
         const distY = mouseY - outlineY;
         
@@ -59,10 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         outline.style.left = `${outlineX}px`;
         outline.style.top = `${outlineY}px`;
+
+        // Blob movement
+        const normX = mouseX / window.innerWidth;
+        const normY = mouseY / window.innerHeight;
         
-        requestAnimationFrame(animateCursor);
+        blobs.forEach((blob, index) => {
+            const speed = (index + 1) * 20;
+            blob.style.transform = `translate(${normX * speed}px, ${normY * speed}px)`;
+        });
+        
+        requestAnimationFrame(animate);
     };
-    animateCursor();
+    animate();
 
 
     // --- 3. Scroll Progress & Navbar Effect ---
@@ -70,50 +100,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     const scrollTopBtn = document.getElementById('scroll-top');
 
+    let scrollTicking = false;
     window.addEventListener('scroll', () => {
-        // Scroll Progress
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        progressBar.style.width = scrolled + "%";
+        if (!scrollTicking) {
+            window.requestAnimationFrame(() => {
+                // Scroll Progress
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + "%";
 
-        // Navbar scrolled state
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+                // Navbar scrolled state
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
 
-        // Scroll to top button visibility
-        if (window.scrollY > 500) {
-            scrollTopBtn.classList.add('visible');
-        } else {
-            scrollTopBtn.classList.remove('visible');
+                // Scroll to top button visibility
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+                scrollTicking = false;
+            });
+            scrollTicking = true;
         }
-    });
+    }, { passive: true });
 
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
 
-    // --- 4. 3D Glass Tilt Effect ---
+    // --- 4. 3D Glass Tilt Effect (Optimized) ---
     const glassCards = document.querySelectorAll('.glass-card');
     
     glassCards.forEach(card => {
+        let rect;
+        
+        card.addEventListener('mouseenter', () => {
+            rect = card.getBoundingClientRect();
+        });
+
         card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
+            if (!rect) rect = card.getBoundingClientRect();
+            
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg rotation
+            const rotateX = ((y - centerY) / centerY) * -10;
             const rotateY = ((x - centerX) / centerX) * 10;
             
             card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
+        }, { passive: true });
         
         card.addEventListener('mouseleave', () => {
             card.style.transform = `translateY(0) rotateX(0) rotateY(0)`;
@@ -218,15 +262,169 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 8. Subtle Blob Movement (Enhanced) ---
-    const blobs = document.querySelectorAll('.blob');
-    window.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        blobs.forEach((blob, index) => {
-            const speed = (index + 1) * 30;
-            blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+    // Moved blob movement logic to the main animation loop in Section 2 for performance
+
+    // --- 9. Interactive Neural Network Background (tsParticles) ---
+    if (typeof tsParticles !== 'undefined') {
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                number: {
+                    value: 100, // Slightly higher density for neural look
+                    density: {
+                        enable: true,
+                        area: 800
+                    }
+                },
+                color: {
+                    value: "#D4AF37"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: { min: 0.2, max: 0.5 },
+                    animation: {
+                        enable: true,
+                        speed: 1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: { min: 1, max: 2 },
+                },
+                links: {
+                    enable: true,
+                    distance: 150,
+                    color: "#D4AF37",
+                    opacity: 0.3,
+                    width: 1,
+                    triangles: {
+                        enable: false // Set true for more complex mesh
+                    }
+                },
+                move: {
+                    enable: true,
+                    speed: 1.5, // Continuous fluid motion
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    outModes: {
+                        default: "out"
+                    },
+                    attract: {
+                        enable: false
+                    }
+                }
+            },
+            interactivity: {
+                detectsOn: "window",
+                events: {
+                    onHover: {
+                        enable: true,
+                        mode: "grab" // "Grab" connects links to cursor
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 200,
+                        links: {
+                            opacity: 0.6
+                        }
+                    }
+                }
+            },
+            detectRetina: true,
+            background: {
+                color: "#0B0B0F"
+            }
         });
-    });
+    }
+
+    // --- 10. Live GitHub Integration ---
+    const githubUsername = "Abhishek250805";
+    const profileCard = document.getElementById('github-profile-card');
+    const reposGrid = document.getElementById('github-repos-grid');
+
+    async function fetchGitHubData() {
+        try {
+            // Fetch User Profile
+            const userResponse = await fetch(`https://api.github.com/users/${githubUsername}`);
+            const userData = await userResponse.json();
+
+            // Fetch Recent Repos
+            const reposResponse = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=6`);
+            const reposData = await reposResponse.json();
+
+            updateGitHubUI(userData, reposData);
+        } catch (error) {
+            console.error("Error fetching GitHub data:", error);
+            profileCard.innerHTML = `<p>Failed to load GitHub data. <a href="https://github.com/${githubUsername}" target="_blank">View Profile</a></p>`;
+        }
+    }
+
+    function updateGitHubUI(user, repos) {
+        // Update Profile Card
+        profileCard.innerHTML = `
+            <img src="${user.avatar_url}" alt="${user.name}" class="github-avatar">
+            <h3>${user.name || githubUsername}</h3>
+            <p>${user.bio || 'Full Stack Developer'}</p>
+            <div class="github-stats-grid">
+                <div class="stat-item">
+                    <h4>${user.public_repos}</h4>
+                    <p>Repos</p>
+                </div>
+                <div class="stat-item">
+                    <h4>${user.followers}</h4>
+                    <p>Followers</p>
+                </div>
+            </div>
+            <a href="${user.html_url}" target="_blank" class="btn btn-outline" style="margin-top: 2rem; width: 100%;">Visit Profile</a>
+        `;
+
+        // Update Repos Grid
+        reposGrid.innerHTML = repos.map(repo => `
+            <div class="repo-card reveal">
+                <div class="repo-header">
+                    <i class="fa-brands fa-github gold-text" style="font-size: 1.5rem;"></i>
+                    <div class="repo-stats">
+                        <span><i class="fa-regular fa-star"></i> ${repo.stargazers_count}</span>
+                    </div>
+                </div>
+                <div class="repo-body">
+                    <h3>${repo.name}</h3>
+                    <p>${repo.description || 'No description available for this project.'}</p>
+                </div>
+                <div class="repo-footer">
+                    <div class="repo-lang">
+                        <span class="lang-dot" style="background: ${getLanguageColor(repo.language)}"></span>
+                        <span>${repo.language || 'Mixed'}</span>
+                    </div>
+                    <a href="${repo.html_url}" target="_blank" class="link-btn">Repo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i></a>
+                </div>
+            </div>
+        `).join('');
+        
+        // Re-observe new elements for reveal animation
+        const newReveals = reposGrid.querySelectorAll('.reveal');
+        newReveals.forEach(el => revealObserver.observe(el));
+    }
+
+    function getLanguageColor(lang) {
+        const colors = {
+            'JavaScript': '#f1e05a',
+            'HTML': '#e34c26',
+            'CSS': '#563d7c',
+            'Python': '#3572A5',
+            'Java': '#b07219',
+            'C++': '#f34b7d',
+            'TypeScript': '#3178c6'
+        };
+        return colors[lang] || '#8e8e8e';
+    }
+
+    if (profileCard) {
+        fetchGitHubData();
+    }
 });

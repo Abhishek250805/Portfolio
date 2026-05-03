@@ -18,6 +18,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Cinematic Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="image/Logo.png" alt="Logo" class="preloader-logo">
+            <div class="preloader-bar-container">
+                <div class="preloader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Neural Network Background -->
+    <div id="tsparticles"></div>
+
     <!-- Custom Luxury Cursor -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
@@ -68,12 +81,19 @@
                     </div>
                 </div>
                 <div class="hero-right reveal">
-                    <div class="badge-premium">Available for Internships</div>
+                    <div class="status-badge-container">
+                        <div class="badge-premium">Available for Internships</div>
+                        <div class="pulse-indicator">
+                            <span class="dot"></span>
+                            <span class="ping"></span>
+                        </div>
+                    </div>
                     <h1 class="name">Abhishek <span class="gold-text">Pandey</span></h1>
                     <h2 class="title">Frontend Architect & BCA Scholar</h2>
                     <p class="tagline">Crafting premium digital experiences with a focus on luxury aesthetics and functional excellence.</p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-gold">Explore Work</a>
+                        <a href="ResumeAP.pdf" download class="btn btn-outline cv-btn"><i class="fa-solid fa-download"></i> Resume</a>
                         <a href="#contact" class="btn btn-outline">Get In Touch</a>
                     </div>
                 </div>
@@ -154,11 +174,11 @@
                     <div class="about-stats">
                         <div class="stat-card glass-card reveal">
                             <h3>04+</h3>
-                            <p>Luxury Projects</p>
+                            <p>Projects</p>
                         </div>
                         <div class="stat-card glass-card reveal">
                             <h3>03+</h3>
-                            <p>Global Certs</p>
+                            <p>Global Workshop Certificates</p>
                         </div>
                     </div>
                 </div>
@@ -179,7 +199,7 @@
                             <span class="skill-tag">HTML5</span>
                             <span class="skill-tag">CSS3 (SCSS)</span>
                             <span class="skill-tag">JavaScript (ES6+)</span>
-                            <span class="skill-tag">Flexbox & Grid</span>
+                            <span class="skill-tag">Impressive UI</span>
                             <span class="skill-tag">Responsive Design</span>
                         </div>
                     </div>
@@ -190,6 +210,7 @@
                             <span class="skill-tag">C++</span>
                             <span class="skill-tag">Java</span>
                             <span class="skill-tag">Python</span>
+                            <span class="skill-tag">R</span>
                         </div>
                     </div>
                     <div class="skill-category glass-card reveal">
@@ -215,9 +236,15 @@
                     <!-- Featured Project: Learn2Ride -->
                     <div class="project-card featured glass-card reveal">
                         <div class="project-info">
-                            <span class="project-badge">Flagship Project</span>
+                            <div class="project-header-meta">
+                                <span class="project-badge">Flagship Project</span>
+                                <div class="building-badge">
+                                    <span class="dot-pulse"></span>
+                                    Currently Building
+                                </div>
+                            </div>
                             <h3>Learn2Ride Platform</h3>
-                            <p>A high-end platform revolutionizing how learners find and book driving trainers. Built with a focus on seamless user flow and robust backend integration.</p>
+                            <p>Learn2Ride is an innovative web platform that reimagines driving education by connecting learners with verified trainers in a secure digital ecosystem. With features like trainer verification, booking management, and streamlined user interaction, it provides a modern solution for skill-based learning. The project reflects practical problem-solving, thoughtful UI design, and scalable web development concepts.</p>
                             <div class="project-tech">
                                 <span>JS</span><span>API</span><span>UX</span>
                             </div>
@@ -239,6 +266,11 @@
                         <div class="project-cta">
                             <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub <i class="fa-brands fa-github"></i></a>
                         </div>
+                        <div class="project-visual">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/amazonimg.png" alt="Website Logo"></span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="project-card glass-card reveal">
@@ -247,6 +279,11 @@
                         <div class="project-cta">
                             <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub <i class="fa-brands fa-github"></i></a>
                         </div>
+                        <div class="project-visual">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/aqiimg.png" alt="Website Logo"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-card glass-card reveal">
                         <h3>Kashi - The Unknown Fact</h3>
@@ -254,6 +291,32 @@
                         <div class="project-cta">
                             <a href="https://adityapaswan568.github.io/Kashi--The-Unexplored-City-/" target="_blank" rel="noopener noreferrer" class="link-btn">Explore Kashi <i class="fa-solid fa-arrow-right-long"></i></a>
                         </div>
+                        <div class="project-visual">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/Kashiimg.png" alt="Website Logo"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- GitHub Activity Section (Live API) -->
+        <section id="github" class="github section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="subtitle">Open Source</span>
+                    <h2 class="section-title">GitHub <span class="gold-text">Contributions</span></h2>
+                </div>
+                
+                <div class="github-content">
+                    <div id="github-profile-card" class="glass-card github-card reveal">
+                        <div class="loader-inner"></div>
+                        <p>Fetching GitHub data...</p>
+                    </div>
+                    
+                    <div id="github-repos-grid" class="repos-grid">
+                        <!-- Repositories will be injected here -->
                     </div>
                 </div>
             </div>
@@ -385,6 +448,9 @@
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
+    <!-- tsParticles Library -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
