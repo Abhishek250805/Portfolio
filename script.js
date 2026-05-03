@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => revealObserver.observe(el));
 
 
-    // --- 2. Custom Luxury Cursor ---
+    // --- 2. Custom Luxury Cursor & Performance ---
     const dot = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');
     const blobs = document.querySelectorAll('.blob');
@@ -42,90 +42,93 @@ document.addEventListener('DOMContentLoaded', () => {
     let outlineX = 0;
     let outlineY = 0;
     let isInteracting = false;
+    let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    // Use a single mousemove listener for everything related to mouse position
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        // Check for interactive elements only if mouse moves (can be throttled)
-        if (!isInteracting) {
-            const target = e.target;
-            const isHovering = target.closest('a, button, .skill-tag, .contact-link, .glass-card');
+    if (isTouchDevice) {
+        if (dot) dot.style.display = 'none';
+        if (outline) outline.style.display = 'none';
+    } else {
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
             
-            if (isHovering) {
-                dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                outline.style.transform = 'translate(-50%, -50%) scale(1.8)';
-                outline.style.borderColor = 'var(--gold-glow)';
-            } else {
-                dot.style.transform = 'translate(-50%, -50%) scale(1)';
-                outline.style.transform = 'translate(-50%, -50%) scale(1)';
-                outline.style.borderColor = 'var(--gold)';
+            if (!isInteracting) {
+                const target = e.target;
+                const isHovering = target.closest('a, button, .skill-tag, .contact-link, .glass-card');
+                
+                if (isHovering) {
+                    dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    outline.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                    outline.style.borderColor = 'var(--gold-glow)';
+                } else {
+                    dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                    outline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    outline.style.borderColor = 'var(--gold)';
+                }
             }
-        }
-    }, { passive: true });
+        }, { passive: true });
 
-    // Smooth animation loop for cursor and blobs
-    const animate = () => {
-        // Dot follows exactly
-        dot.style.left = `${mouseX}px`;
-        dot.style.top = `${mouseY}px`;
+        const animate = () => {
+            dot.style.left = `${mouseX}px`;
+            dot.style.top = `${mouseY}px`;
 
-        // Outline follows with lag
-        const distX = mouseX - outlineX;
-        const distY = mouseY - outlineY;
-        
-        outlineX += distX * 0.15;
-        outlineY += distY * 0.15;
-        
-        outline.style.left = `${outlineX}px`;
-        outline.style.top = `${outlineY}px`;
+            const distX = mouseX - outlineX;
+            const distY = mouseY - outlineY;
+            
+            outlineX += distX * 0.15;
+            outlineY += distY * 0.15;
+            
+            outline.style.left = `${outlineX}px`;
+            outline.style.top = `${outlineY}px`;
 
-        // Blob movement
-        const normX = mouseX / window.innerWidth;
-        const normY = mouseY / window.innerHeight;
-        
-        blobs.forEach((blob, index) => {
-            const speed = (index + 1) * 20;
-            blob.style.transform = `translate(${normX * speed}px, ${normY * speed}px)`;
-        });
-        
-        requestAnimationFrame(animate);
-    };
-    animate();
+            const normX = mouseX / window.innerWidth;
+            const normY = mouseY / window.innerHeight;
+            
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 20;
+                blob.style.transform = `translate(${normX * speed}px, ${normY * speed}px)`;
+            });
+            
+            requestAnimationFrame(animate);
+        };
+        animate();
+    }
 
 
-    // --- 3. Scroll Progress & Navbar Effect ---
+    // --- 3. Scroll Progress & Navbar Effect (Throttled) ---
     const progressBar = document.querySelector('.scroll-progress-bar');
     const navbar = document.querySelector('.navbar');
     const scrollTopBtn = document.getElementById('scroll-top');
 
-    let scrollTicking = false;
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
     window.addEventListener('scroll', () => {
-        if (!scrollTicking) {
+        lastScrollY = window.scrollY;
+        if (!ticking) {
             window.requestAnimationFrame(() => {
                 // Scroll Progress
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const winScroll = document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
-                progressBar.style.width = scrolled + "%";
+                if (progressBar) progressBar.style.width = scrolled + "%";
 
                 // Navbar scrolled state
-                if (window.scrollY > 50) {
+                if (lastScrollY > 50) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
 
                 // Scroll to top button visibility
-                if (window.scrollY > 500) {
+                if (lastScrollY > 500) {
                     scrollTopBtn.classList.add('visible');
                 } else {
                     scrollTopBtn.classList.remove('visible');
                 }
-                scrollTicking = false;
+                ticking = false;
             });
-            scrollTicking = true;
+            ticking = true;
         }
     }, { passive: true });
 
@@ -134,35 +137,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 4. 3D Glass Tilt Effect (Optimized) ---
+    // --- 4. 3D Glass Tilt Effect (Disabled on Mobile) ---
     const glassCards = document.querySelectorAll('.glass-card');
     
-    glassCards.forEach(card => {
-        let rect;
-        
-        card.addEventListener('mouseenter', () => {
-            rect = card.getBoundingClientRect();
-        });
+    if (!isTouchDevice) {
+        glassCards.forEach(card => {
+            let rect;
+            
+            card.addEventListener('mouseenter', () => {
+                rect = card.getBoundingClientRect();
+            });
 
-        card.addEventListener('mousemove', (e) => {
-            if (!rect) rect = card.getBoundingClientRect();
+            card.addEventListener('mousemove', (e) => {
+                if (!rect) rect = card.getBoundingClientRect();
+                
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            }, { passive: true });
             
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
-            
-            card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        }, { passive: true });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `translateY(0) rotateX(0) rotateY(0)`;
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `translateY(0) rotateX(0) rotateY(0)`;
+            });
         });
-    });
+    }
 
 
     // --- 5. Project Spotlight Effect ---
@@ -266,11 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 9. Interactive Neural Network Background (tsParticles) ---
     if (typeof tsParticles !== 'undefined') {
+        const particleCount = isTouchDevice ? 40 : 100;
+        
         tsParticles.load("tsparticles", {
             fpsLimit: 60,
             particles: {
                 number: {
-                    value: 100, // Slightly higher density for neural look
+                    value: particleCount,
                     density: {
                         enable: true,
                         area: 800
@@ -283,9 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     type: "circle"
                 },
                 opacity: {
-                    value: { min: 0.2, max: 0.5 },
+                    value: { min: 0.1, max: 0.4 },
                     animation: {
-                        enable: true,
+                        enable: !isTouchDevice, // Disable opacity animation on mobile
                         speed: 1,
                         sync: false
                     }
@@ -297,23 +304,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     enable: true,
                     distance: 150,
                     color: "#D4AF37",
-                    opacity: 0.3,
-                    width: 1,
-                    triangles: {
-                        enable: false // Set true for more complex mesh
-                    }
+                    opacity: 0.2,
+                    width: 1
                 },
                 move: {
                     enable: true,
-                    speed: 1.5, // Continuous fluid motion
+                    speed: isTouchDevice ? 0.8 : 1.5, // Slower on mobile
                     direction: "none",
                     random: false,
                     straight: false,
                     outModes: {
                         default: "out"
-                    },
-                    attract: {
-                        enable: false
                     }
                 }
             },
@@ -321,8 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 detectsOn: "window",
                 events: {
                     onHover: {
-                        enable: true,
-                        mode: "grab" // "Grab" connects links to cursor
+                        enable: !isTouchDevice,
+                        mode: "grab"
                     },
                     resize: true
                 },
@@ -330,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     grab: {
                         distance: 200,
                         links: {
-                            opacity: 0.6
+                            opacity: 0.5
                         }
                     }
                 }
