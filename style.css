@@ -947,7 +947,8 @@ a, button, .skill-tag, .contact-link {
     .container { padding: 0 1.5rem; }
     .section { padding: 100px 0; }
     .name { font-size: 4rem; }
-    .project-card.featured { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
     .project-visual { height: 300px; }
 }
 
