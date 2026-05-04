@@ -224,13 +224,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 7. Contact Form Validation ---
+    // --- 7. Contact Form Submission (Web3Forms) ---
     const contactForm = document.getElementById('contact-form');
-    
+    const submitBtn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('form-success');
+    const errorMsg = document.getElementById('form-error');
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            // Validation logic
             let isValid = true;
             const name = document.getElementById('name');
             const email = document.getElementById('email');
@@ -241,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const messageError = document.getElementById('message-error');
             
             [nameError, emailError, messageError].forEach(el => el.textContent = '');
+            [successMsg, errorMsg].forEach(el => el.classList.add('hidden'));
             
             if (name.value.trim().length < 2) {
                 nameError.textContent = 'Please enter your full name.';
@@ -259,10 +264,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             if (isValid) {
-                const successMsg = document.getElementById('form-success');
-                successMsg.classList.remove('hidden');
-                contactForm.reset();
-                setTimeout(() => successMsg.classList.add('hidden'), 5000);
+                // UI State: Sending
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const response = await fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        successMsg.classList.remove('hidden');
+                        contactForm.reset();
+                    } else {
+                        errorMsg.textContent = result.message || "Something went wrong.";
+                        errorMsg.classList.remove('hidden');
+                    }
+                } catch (error) {
+                    errorMsg.textContent = "Check your internet connection and try again.";
+                    errorMsg.classList.remove('hidden');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Inquiry';
+                    setTimeout(() => {
+                        [successMsg, errorMsg].forEach(el => el.classList.add('hidden'));
+                    }, 5000);
+                }
             }
         });
     }
@@ -336,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             },
-            detectRetina: true,
+            detectRetina: !isTouchDevice,
             background: {
                 color: "#0B0B0F"
             }

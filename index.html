@@ -413,22 +413,24 @@
                         </div>
                     </div>
                     <form id="contact-form" class="contact-form glass-card reveal">
+                        <input type="hidden" name="access_key" value="79c30505-2ae7-4324-bb2d-35425e2b636e">
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="text" id="name" placeholder="Name" required>
+                                <input type="text" id="name" name="name" placeholder="Name" required>
                                 <span class="error-msg" id="name-error"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" id="email" placeholder="Email" required>
+                                <input type="email" id="email" name="email" placeholder="Email" required>
                                 <span class="error-msg" id="email-error"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" rows="4" placeholder="Message" required></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="Message" required></textarea>
                             <span class="error-msg" id="message-error"></span>
                         </div>
-                        <button type="submit" class="btn btn-gold w-100">Send Inquiry</button>
+                        <button type="submit" class="btn btn-gold w-100" id="submit-btn">Send Inquiry</button>
                         <div id="form-success" class="success-msg hidden">Inquiry sent successfully.</div>
+                        <div id="form-error" class="error-msg hidden" style="margin-top: 1rem; text-align: center;">Something went wrong. Please try again.</div>
                     </form>
                 </div>
             </div>
