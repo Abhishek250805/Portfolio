@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Cinematic Preloader -->
+    <!-- ░░ CINEMATIC PRELOADER ░░ -->
     <div id="preloader">
         <div class="preloader-content">
             <img src="image/Logo.png" alt="Logo" class="preloader-logo">
@@ -28,19 +28,103 @@
         </div>
     </div>
 
-    <!-- Interactive Neural Network Background -->
-    <div id="tsparticles"></div>
+    <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <!--  LAYER 0 — HUD Circuit Canvas  (drawn via JS)      -->
+    <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+    <canvas id="hud-canvas" aria-hidden="true"></canvas>
 
-    <!-- Custom Luxury Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <!-- Background Animated Blobs -->
-    <div class="blob-container">
+    <!-- ░░ LAYER 1 — Ambient Blobs (Aurora mesh gradient) ░░ -->
+    <div class="blob-container" aria-hidden="true">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
+
+    <!-- ░░ LAYER 2 — Cyber Grid ░░ -->
+    <div class="cyber-grid" aria-hidden="true"></div>
+
+    <!-- ░░ LAYER 3 — Rotating Gears & HUD Rings Mechanism ░░ -->
+    <div class="cyber-gears-container" aria-hidden="true">
+
+        <!-- Centre Cluster: Large orange gear + cyan HUD ring -->
+        <div class="gear-wrapper center-wrapper">
+            <div class="gear gear-center"></div>
+            <div class="hud-ring ring-center"></div>
+        </div>
+
+        <!-- Left Cluster: Amber gear + orange HUD ring -->
+        <div class="gear-wrapper left-wrapper">
+            <div class="gear gear-left"></div>
+            <div class="hud-ring ring-left"></div>
+        </div>
+
+        <!-- Right Cluster: Cyan gear + cyan HUD ring -->
+        <div class="gear-wrapper right-wrapper">
+            <div class="gear gear-right"></div>
+            <div class="hud-ring ring-right"></div>
+        </div>
+
+        <!-- Bottom-right cluster: amber ring -->
+        <div class="gear-wrapper br-wrapper">
+            <div class="hud-ring ring-br"></div>
+        </div>
+
+        <!-- Scattered single gears (no wrapper needed) -->
+        <div class="gear gear-bottom-left"></div>
+        <div class="gear gear-bottom-right"></div>
+    </div>
+
+    <!-- ░░ LAYER 4 — HUD Corner Brackets ░░ -->
+    <div class="hud-corner hud-corner-tl" aria-hidden="true"></div>
+    <div class="hud-corner hud-corner-tr" aria-hidden="true"></div>
+    <div class="hud-corner hud-corner-bl" aria-hidden="true"></div>
+    <div class="hud-corner hud-corner-br" aria-hidden="true"></div>
+
+    <!-- ░░ LAYER 5 — HUD Data Readout Strips ░░ -->
+    <div class="hud-readout hud-readout-left" aria-hidden="true">
+        SYS&nbsp;STATUS&nbsp;▸&nbsp;ONLINE<br>
+        CPU&nbsp;▸&nbsp;24%<br>
+        MEM&nbsp;▸&nbsp;1.2&nbsp;GB<br>
+        NET&nbsp;▸&nbsp;ACTIVE<br>
+        UPTIME&nbsp;▸&nbsp;99.9%<br>
+        BUILD&nbsp;▸&nbsp;v3.7.1
+    </div>
+    <div class="hud-readout hud-readout-right" aria-hidden="true">
+        RENDER&nbsp;▸&nbsp;60&nbsp;FPS<br>
+        PARTICLES&nbsp;▸&nbsp;90<br>
+        NODES&nbsp;▸&nbsp;22<br>
+        EDGES&nbsp;▸&nbsp;LIVE<br>
+        PARALLAX&nbsp;▸&nbsp;ON<br>
+        MODE&nbsp;▸&nbsp;HUD
+    </div>
+
+    <!-- ░░ LAYER 6 — Dual Scanning Bars ░░ -->
+    <div class="scanning-bar"   aria-hidden="true"></div>
+    <div class="scanning-bar-2" aria-hidden="true"></div>
+
+    <!-- ░░ LAYER 7 — Glass Noise + Vignette + Corner Glows ░░ -->
+    <div class="noise-overlay"  aria-hidden="true"></div>
+    <div class="vignette-overlay" aria-hidden="true"></div>
+    <div class="corner-glows"   aria-hidden="true"></div>
+
+    <!-- ░░ LAYER 8 — tsParticles (floating glowing nodes) ░░ -->
+    <div id="tsparticles" aria-hidden="true"></div>
+
+    <!-- ░░ LAYER 9 — Cursor Light Trail Canvas ░░ -->
+    <canvas id="trail-canvas" aria-hidden="true"></canvas>
+
+    <!-- ░░ LAYER 10 — Large Logo Watermark (behind Hero) ░░ -->
+    <div class="logo-watermark" aria-hidden="true">
+        <img src="image/Logo.png" alt="">
+    </div>
+
+    <!-- ░░ Custom Luxury Cursor ░░ -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- ════════════════════════════════════════════════════ -->
+    <!--  PORTFOLIO CONTENT — untouched                      -->
+    <!-- ════════════════════════════════════════════════════ -->
 
     <!-- Header / Navbar -->
     <header class="navbar">
@@ -89,7 +173,7 @@
                         </div>
                     </div>
                     <h1 class="name">Abhishek <span class="gold-text">Pandey</span></h1>
-                    <h2 class="title">Frontend Architect & BCA Scholar</h2>
+                    <h2 class="title">Frontend Architect &amp; BCA Scholar</h2>
                     <p class="tagline">Crafting premium digital experiences with a focus on luxury aesthetics and functional excellence.</p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-gold">Explore Work</a>
@@ -109,7 +193,7 @@
             <div class="container">
                 <div class="section-header reveal" style="margin-bottom: 2rem;">
                     <span class="subtitle">Stack</span>
-                    <h2 class="section-title">Technologies & <span class="gold-text">Tools</span></h2>
+                    <h2 class="section-title">Technologies &amp; <span class="gold-text">Tools</span></h2>
                 </div>
             </div>
             <div class="marquee-wrapper">
@@ -133,7 +217,7 @@
                     <div class="tech-card">Cursor</div>
                     <div class="tech-card">Kaggle</div>
                     <div class="tech-card">Antigravity</div>
-                    <!-- Set 2 (for seamless loop) -->
+                    <!-- Set 2 (seamless loop) -->
                     <div class="tech-card">HTML</div>
                     <div class="tech-card">CSS</div>
                     <div class="tech-card">JavaScript</div>
@@ -148,7 +232,6 @@
                     <div class="tech-card">GitHub</div>
                     <div class="tech-card">Firebase</div>
                     <div class="tech-card">Gemini Pro API</div>
-
                     <div class="tech-card">VS Code</div>
                     <div class="tech-card">Cursor</div>
                     <div class="tech-card">Kaggle</div>
@@ -166,7 +249,7 @@
                 </div>
                 <div class="about-grid">
                     <div class="about-text glass-card reveal">
-                        <p>I’m a <strong>BCA student</strong> and <strong>aspiring full-stack developer</strong> passionate about crafting sleek, high-performance web experiences.</p>
+                        <p>I'm a <strong>BCA student</strong> and <strong>aspiring full-stack developer</strong> passionate about crafting sleek, high-performance web experiences.</p>
                         <p>I specialize in transforming ideas into modern digital products using <strong>HTML, CSS, JavaScript, React, and Next.js</strong>, with a strong focus on clean UI, smooth interactions, and scalable architecture.</p>
                         <p>Beyond coding, I enjoy solving real-world problems through technology—building platforms that are not just functional, but <strong>intelligent, intuitive, and impactful</strong>.</p>
                         <div class="signature">Abhishek Pandey</div>
@@ -268,7 +351,7 @@
                         </div>
                         <div class="project-visual">
                             <div class="visual-placeholder gold-glow">
-                                <span><img src="./image/amazonimg.png" alt="Website Logo"></span>
+                                <span><img src="./image/amazonimg.png" alt="Amazon UI"></span>
                             </div>
                         </div>
                     </div>
@@ -281,10 +364,11 @@
                         </div>
                         <div class="project-visual">
                             <div class="visual-placeholder gold-glow">
-                                <span><img src="./image/aqiimg.png" alt="Website Logo"></span>
+                                <span><img src="./image/aqiimg.png" alt="Weather App"></span>
                             </div>
                         </div>
                     </div>
+
                     <div class="project-card glass-card reveal">
                         <h3>Kashi - The Unknown Fact</h3>
                         <p>An immersive digital exploration of Varanasi, uncovering hidden historical facts and spiritual depth through interactive storytelling.</p>
@@ -293,7 +377,7 @@
                         </div>
                         <div class="project-visual">
                             <div class="visual-placeholder gold-glow">
-                                <span><img src="./image/Kashiimg.png" alt="Website Logo"></span>
+                                <span><img src="./image/Kashiimg.png" alt="Kashi Project"></span>
                             </div>
                         </div>
                     </div>
@@ -327,7 +411,7 @@
             <div class="container">
                 <div class="section-header reveal">
                     <span class="subtitle">Validation</span>
-                    <h2 class="section-title">Professional Assets <span class="gold-text">& Certificates</span></h2>
+                    <h2 class="section-title">Professional Assets <span class="gold-text">&amp; Certificates</span></h2>
                 </div>
                 <div class="cert-grid">
                     <div class="cert-item glass-card reveal">
@@ -441,7 +525,7 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2026 Abhishek Pandey. All Rights Reserved.</p>
-                <div class="footer-tag">Crafted with Luxury & Code</div>
+                <div class="footer-tag">Crafted with Luxury &amp; Code</div>
             </div>
         </div>
     </footer>
@@ -450,9 +534,12 @@
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- tsParticles Library -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+    <!-- ░░ SCRIPTS ░░ -->
+    <!-- tsParticles Library for Interactive Neural Network -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <!-- HUD Background Engine (canvas circuits + particles) -->
+    <script src="hud-background.js"></script>
+    <!-- Main portfolio interactions -->
     <script src="script.js"></script>
 </body>
 </html>

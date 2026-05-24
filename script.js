@@ -1,312 +1,301 @@
+/**
+ * ================================================================
+ *  PORTFOLIO — MAIN INTERACTION SCRIPT
+ *  Handles: cursor · scroll · 3D tilt · mobile menu
+ *           project spotlight · contact form · GitHub API
+ *  Background / HUD engine is in hud-background.js
+ * ================================================================
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 0. Cinematic Preloader Logic ---
+
+    // ── 0. Cinematic Preloader ────────────────────────────────
     const preloader = document.getElementById('preloader');
-    
+    document.body.style.overflowY = 'hidden';
+
     window.addEventListener('load', () => {
         setTimeout(() => {
             preloader.classList.add('fade-out');
-            // Enable scrolling after preloader is gone
             document.body.style.overflowY = 'auto';
-        }, 1500); // Minimum duration for cinematic effect
+        }, 1500);
     });
 
-    // Disable scroll while preloader is active
-    document.body.style.overflowY = 'hidden';
-    
-    // --- 1. Enhanced Section Reveal (Intersection Observer) ---
-    const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
+    // ── 1. Section Reveal (IntersectionObserver) ──────────────
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
-    }, revealOptions);
+    }, { threshold: 0.14, rootMargin: '0px 0px -50px 0px' });
 
-    const revealElements = document.querySelectorAll('.reveal');
-    revealElements.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 
-    // --- 2. Custom Luxury Cursor & Performance ---
-    const dot = document.querySelector('.cursor-dot');
-    const outline = document.querySelector('.cursor-outline');
-    const blobs = document.querySelectorAll('.blob');
-    
-    let mouseX = 0;
-    let mouseY = 0;
-    let outlineX = 0;
-    let outlineY = 0;
-    let isInteracting = false;
-    let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // ── 2. Custom Luxury Cursor ───────────────────────────────
+    const dot      = document.querySelector('.cursor-dot');
+    const outline  = document.querySelector('.cursor-outline');
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    if (isTouchDevice) {
-        if (dot) dot.style.display = 'none';
-        if (outline) outline.style.display = 'none';
-    } else {
-        window.addEventListener('mousemove', (e) => {
+    let mouseX = window.innerWidth  / 2;
+    let mouseY = window.innerHeight / 2;
+    let outX   = mouseX;
+    let outY   = mouseY;
+
+    if (!isTouchDevice && dot && outline) {
+        window.addEventListener('mousemove', e => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            if (!isInteracting) {
-                const target = e.target;
-                const isHovering = target.closest('a, button, .skill-tag, .contact-link, .glass-card');
-                
-                if (isHovering) {
-                    dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    outline.style.transform = 'translate(-50%, -50%) scale(1.8)';
-                    outline.style.borderColor = 'var(--gold-glow)';
-                } else {
-                    dot.style.transform = 'translate(-50%, -50%) scale(1)';
-                    outline.style.transform = 'translate(-50%, -50%) scale(1)';
-                    outline.style.borderColor = 'var(--gold)';
-                }
+
+            const hovering = e.target.closest('a, button, .skill-tag, .contact-link, .glass-card');
+            if (hovering) {
+                dot.style.transform    = 'translate(-50%,-50%) scale(1.6)';
+                outline.style.transform = 'translate(-50%,-50%) scale(2.0)';
+                outline.style.borderColor = '#00D9FF';
+            } else {
+                dot.style.transform    = 'translate(-50%,-50%) scale(1)';
+                outline.style.transform = 'translate(-50%,-50%) scale(1)';
+                outline.style.borderColor = '#FF8C00';
             }
         }, { passive: true });
 
-        const animate = () => {
+        const animateCursor = () => {
             dot.style.left = `${mouseX}px`;
-            dot.style.top = `${mouseY}px`;
-
-            const distX = mouseX - outlineX;
-            const distY = mouseY - outlineY;
-            
-            outlineX += distX * 0.15;
-            outlineY += distY * 0.15;
-            
-            outline.style.left = `${outlineX}px`;
-            outline.style.top = `${outlineY}px`;
-
-            const normX = mouseX / window.innerWidth;
-            const normY = mouseY / window.innerHeight;
-            
-            blobs.forEach((blob, index) => {
-                const speed = (index + 1) * 20;
-                blob.style.transform = `translate(${normX * speed}px, ${normY * speed}px)`;
-            });
-            
-            requestAnimationFrame(animate);
+            dot.style.top  = `${mouseY}px`;
+            outX += (mouseX - outX) * 0.14;
+            outY += (mouseY - outY) * 0.14;
+            outline.style.left = `${outX}px`;
+            outline.style.top  = `${outY}px`;
+            requestAnimationFrame(animateCursor);
         };
-        animate();
+        animateCursor();
+    } else {
+        if (dot)     dot.style.display    = 'none';
+        if (outline) outline.style.display = 'none';
     }
 
 
-    // --- 3. Scroll Progress & Navbar Effect (Throttled) ---
+    // ── 3. Scroll Progress & Navbar ───────────────────────────
     const progressBar = document.querySelector('.scroll-progress-bar');
-    const navbar = document.querySelector('.navbar');
+    const navbar      = document.querySelector('.navbar');
     const scrollTopBtn = document.getElementById('scroll-top');
-
-    let lastScrollY = window.scrollY;
+    let lastY   = window.scrollY;
     let ticking = false;
 
     window.addEventListener('scroll', () => {
-        lastScrollY = window.scrollY;
+        lastY = window.scrollY;
         if (!ticking) {
-            window.requestAnimationFrame(() => {
-                // Scroll Progress
-                const winScroll = document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                if (progressBar) progressBar.style.width = scrolled + "%";
+            requestAnimationFrame(() => {
+                // Progress bar
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (progressBar) progressBar.style.width = `${(lastY / docHeight) * 100}%`;
 
-                // Navbar scrolled state
-                if (lastScrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
+                // Navbar glass intensifies on scroll
+                if (lastY > 50) navbar.classList.add('scrolled');
+                else            navbar.classList.remove('scrolled');
 
-                // Scroll to top button visibility
-                if (lastScrollY > 500) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                }
+                // Scroll-to-top button
+                if (lastY > 500) scrollTopBtn.classList.add('visible');
+                else             scrollTopBtn.classList.remove('visible');
+
+                // Logo watermark parallax
+                const wm = document.querySelector('.logo-watermark');
+                if (wm) wm.style.transform = `translate(-50%, calc(-50% + ${lastY * 0.15}px))`;
+
                 ticking = false;
             });
             ticking = true;
         }
     }, { passive: true });
 
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
 
 
-    // --- 4. 3D Glass Tilt Effect (Disabled on Mobile) ---
-    const glassCards = document.querySelectorAll('.glass-card');
-    
+    // ── 4. 3D Glass Tilt (desktop only) ──────────────────────
     if (!isTouchDevice) {
-        glassCards.forEach(card => {
+        document.querySelectorAll('.glass-card').forEach(card => {
             let rect;
-            
-            card.addEventListener('mouseenter', () => {
-                rect = card.getBoundingClientRect();
-            });
-
-            card.addEventListener('mousemove', (e) => {
+            card.addEventListener('mouseenter', () => { rect = card.getBoundingClientRect(); });
+            card.addEventListener('mousemove', e => {
                 if (!rect) rect = card.getBoundingClientRect();
-                
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -10;
-                const rotateY = ((x - centerX) / centerX) * 10;
-                
-                card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                const x  = e.clientX - rect.left;
+                const y  = e.clientY - rect.top;
+                const rX = ((y - rect.height / 2) / rect.height) * -10;
+                const rY = ((x - rect.width  / 2) / rect.width)  *  10;
+                card.style.transform = `translateY(-10px) rotateX(${rX}deg) rotateY(${rY}deg)`;
             }, { passive: true });
-            
             card.addEventListener('mouseleave', () => {
-                card.style.transform = `translateY(0) rotateX(0) rotateY(0)`;
+                card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
             });
         });
     }
 
 
-    // --- 5. Project Spotlight Effect ---
-    const projectGrid = document.querySelector('.projects-grid');
+    // ── 5. Project Spotlight Dimming ──────────────────────────
+    const projectGrid  = document.querySelector('.projects-grid');
     const projectCards = document.querySelectorAll('.project-card');
 
     projectCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            projectGrid.classList.add('dimmed');
-        });
-        card.addEventListener('mouseleave', () => {
-            projectGrid.classList.remove('dimmed');
-        });
+        card.addEventListener('mouseenter', () => projectGrid && projectGrid.classList.add('dimmed'));
+        card.addEventListener('mouseleave', () => projectGrid && projectGrid.classList.remove('dimmed'));
     });
 
 
-    // --- 6. Mobile Menu Logic ---
+    // ── 6. Mobile Menu ────────────────────────────────────────
     const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (menuToggle) {
+    const navLinks   = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            const open = navLinks.style.display === 'flex';
+            navLinks.style.display = open ? 'none' : 'flex';
             const bars = menuToggle.querySelectorAll('.bar');
-            bars[0].style.transform = navLinks.style.display === 'flex' ? 'rotate(45deg) translate(5px, 5px)' : 'none';
-            bars[1].style.transform = navLinks.style.display === 'flex' ? 'rotate(-45deg) translate(5px, -5px)' : 'none';
+            bars[0].style.transform = open ? 'none' : 'rotate(45deg) translate(5px, 5px)';
+            bars[1].style.transform = open ? 'none' : 'rotate(-45deg) translate(5px, -5px)';
         });
     }
 
-    // Smooth Scroll with Offset
+    // Smooth anchor scroll (with navbar offset)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const navHeight = 100;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                if (window.innerWidth <= 768) {
+            const id  = this.getAttribute('href');
+            if (id === '#') return;
+            const el  = document.querySelector(id);
+            if (el) {
+                window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+                if (navLinks && window.innerWidth <= 768) {
                     navLinks.style.display = 'none';
-                    const bars = menuToggle.querySelectorAll('.bar');
-                    bars.forEach(bar => bar.style.transform = 'none');
+                    menuToggle.querySelectorAll('.bar').forEach(b => b.style.transform = 'none');
                 }
             }
         });
     });
 
 
-    // --- 7. Contact Form Submission (Web3Forms) ---
+    // ── 7. Contact Form (Web3Forms) ───────────────────────────
     const contactForm = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const successMsg = document.getElementById('form-success');
-    const errorMsg = document.getElementById('form-error');
+    const submitBtn   = document.getElementById('submit-btn');
+    const successMsg  = document.getElementById('form-success');
+    const errorMsgEl  = document.getElementById('form-error');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
-            // Validation logic
-            let isValid = true;
-            const name = document.getElementById('name');
-            const email = document.getElementById('email');
+            let valid = true;
+
+            const name    = document.getElementById('name');
+            const email   = document.getElementById('email');
             const message = document.getElementById('message');
-            
-            const nameError = document.getElementById('name-error');
-            const emailError = document.getElementById('email-error');
-            const messageError = document.getElementById('message-error');
-            
-            [nameError, emailError, messageError].forEach(el => el.textContent = '');
-            [successMsg, errorMsg].forEach(el => el.classList.add('hidden'));
-            
-            if (name.value.trim().length < 2) {
-                nameError.textContent = 'Please enter your full name.';
-                isValid = false;
-            }
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email.value.trim())) {
-                emailError.textContent = 'Please enter a valid email address.';
-                isValid = false;
-            }
-            
-            if (message.value.trim().length < 10) {
-                messageError.textContent = 'Message must be at least 10 characters.';
-                isValid = false;
-            }
-            
-            if (isValid) {
-                // UI State: Sending
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+            const nameErr = document.getElementById('name-error');
+            const mailErr = document.getElementById('email-error');
+            const msgErr  = document.getElementById('message-error');
 
-                const formData = new FormData(contactForm);
+            [nameErr, mailErr, msgErr].forEach(el => el.textContent = '');
+            [successMsg, errorMsgEl].forEach(el => el.classList.add('hidden'));
 
-                try {
-                    const response = await fetch('https://api.web3forms.com/submit', {
-                        method: 'POST',
-                        body: formData
-                    });
+            if (name.value.trim().length < 2)                       { nameErr.textContent = 'Please enter your full name.'; valid = false; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value))   { mailErr.textContent = 'Please enter a valid email.'; valid = false; }
+            if (message.value.trim().length < 10)                   { msgErr.textContent  = 'Message must be at least 10 characters.'; valid = false; }
 
-                    const result = await response.json();
+            if (!valid) return;
 
-                    if (result.success) {
-                        successMsg.classList.remove('hidden');
-                        contactForm.reset();
-                    } else {
-                        errorMsg.textContent = result.message || "Something went wrong.";
-                        errorMsg.classList.remove('hidden');
-                    }
-                } catch (error) {
-                    errorMsg.textContent = "Check your internet connection and try again.";
-                    errorMsg.classList.remove('hidden');
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Send Inquiry';
-                    setTimeout(() => {
-                        [successMsg, errorMsg].forEach(el => el.classList.add('hidden'));
-                    }, 5000);
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+
+            try {
+                const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(contactForm) });
+                const data = await res.json();
+                if (data.success) {
+                    successMsg.classList.remove('hidden');
+                    contactForm.reset();
+                } else {
+                    errorMsgEl.textContent = data.message || 'Something went wrong.';
+                    errorMsgEl.classList.remove('hidden');
                 }
+            } catch {
+                errorMsgEl.textContent = 'Check your internet connection and try again.';
+                errorMsgEl.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Inquiry';
+                setTimeout(() => [successMsg, errorMsgEl].forEach(el => el.classList.add('hidden')), 5000);
             }
         });
     }
 
-    // Moved blob movement logic to the main animation loop in Section 2 for performance
 
-    // --- 9. Interactive Neural Network Background (tsParticles) ---
+    // ── 8. Live GitHub Integration ────────────────────────────
+    // (Particles now handled directly by hud-background.js canvas for performance)
+    const GH_USER    = 'Abhishek250805';
+    const profileCard = document.getElementById('github-profile-card');
+    const reposGrid   = document.getElementById('github-repos-grid');
+
+    async function fetchGitHub() {
+        try {
+            const [userRes, reposRes] = await Promise.all([
+                fetch(`https://api.github.com/users/${GH_USER}`),
+                fetch(`https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=6`)
+            ]);
+            const [user, repos] = await Promise.all([userRes.json(), reposRes.json()]);
+            renderGitHub(user, repos);
+        } catch {
+            if (profileCard) profileCard.innerHTML = `<p>Failed to load GitHub data. <a href="https://github.com/${GH_USER}" target="_blank">View Profile</a></p>`;
+        }
+    }
+
+    function renderGitHub(user, repos) {
+        if (profileCard) {
+            profileCard.innerHTML = `
+                <img src="${user.avatar_url}" alt="${user.name || GH_USER}" class="github-avatar">
+                <h3>${user.name || GH_USER}</h3>
+                <p>${user.bio || 'Full Stack Developer'}</p>
+                <div class="github-stats-grid">
+                    <div class="stat-item"><h4>${user.public_repos}</h4><p>Repos</p></div>
+                    <div class="stat-item"><h4>${user.followers}</h4><p>Followers</p></div>
+                </div>
+                <a href="${user.html_url}" target="_blank" class="btn btn-outline" style="margin-top:2rem;width:100%;">Visit Profile</a>
+            `;
+        }
+        if (reposGrid) {
+            reposGrid.innerHTML = repos.map(repo => `
+                <div class="repo-card reveal">
+                    <div class="repo-header">
+                        <i class="fa-brands fa-github gold-text" style="font-size:1.5rem;"></i>
+                        <div class="repo-stats"><span><i class="fa-regular fa-star"></i> ${repo.stargazers_count}</span></div>
+                    </div>
+                    <div class="repo-body">
+                        <h3>${repo.name}</h3>
+                        <p>${repo.description || 'No description available.'}</p>
+                    </div>
+                    <div class="repo-footer">
+                        <div class="repo-lang">
+                            <span class="lang-dot" style="background:${langColor(repo.language)}"></span>
+                            <span>${repo.language || 'Mixed'}</span>
+                        </div>
+                        <a href="${repo.html_url}" target="_blank" class="link-btn">Repo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></a>
+                    </div>
+                </div>
+            `).join('');
+            reposGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        }
+    }
+
+    function langColor(lang) {
+        return ({
+            JavaScript: '#f1e05a', HTML: '#e34c26', CSS: '#563d7c',
+            Python: '#3572A5', Java: '#b07219', 'C++': '#f34b7d', TypeScript: '#3178c6'
+        })[lang] || '#8e8e8e';
+    }
+
+    if (profileCard) fetchGitHub();
+
+    // ── 9. tsParticles — Floating Interactive Neural Network ────
     if (typeof tsParticles !== 'undefined') {
-        const particleCount = isTouchDevice ? 40 : 100;
-        
-        tsParticles.load("tsparticles", {
-            fpsLimit: 60,
+        const particleCount = isTouchDevice ? 35 : 85;
+        tsParticles.load('tsparticles', {
+            fpsLimit: 40, // Cap tsParticles FPS for buttery smooth performance!
             particles: {
                 number: {
                     value: particleCount,
@@ -316,32 +305,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 color: {
-                    value: "#D4AF37"
+                    value: ["#FF8C00", "#00D9FF"] // Gold and Cyan alternating nodes
                 },
                 shape: {
                     type: "circle"
                 },
                 opacity: {
-                    value: { min: 0.1, max: 0.4 },
+                    value: { min: 0.15, max: 0.45 },
                     animation: {
-                        enable: !isTouchDevice, // Disable opacity animation on mobile
+                        enable: !isTouchDevice,
                         speed: 1,
                         sync: false
                     }
                 },
                 size: {
-                    value: { min: 1, max: 2 },
+                    value: { min: 1, max: 2.5 },
                 },
                 links: {
                     enable: true,
-                    distance: 150,
-                    color: "#D4AF37",
-                    opacity: 0.2,
+                    distance: 140,
+                    color: "#FF8C00", // Gold circuit connections
+                    opacity: 0.22,
                     width: 1
                 },
                 move: {
                     enable: true,
-                    speed: isTouchDevice ? 0.8 : 1.5, // Slower on mobile
+                    speed: isTouchDevice ? 0.7 : 1.2, // Balanced lag-free speed
                     direction: "none",
                     random: false,
                     straight: false,
@@ -361,103 +350,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 modes: {
                     grab: {
-                        distance: 200,
+                        distance: 180,
                         links: {
-                            opacity: 0.5
+                            opacity: 0.48
                         }
                     }
                 }
             },
-            detectRetina: !isTouchDevice,
-            background: {
-                color: "#0B0B0F"
-            }
+            detectRetina: !isTouchDevice
         });
     }
 
-    // --- 10. Live GitHub Integration ---
-    const githubUsername = "Abhishek250805";
-    const profileCard = document.getElementById('github-profile-card');
-    const reposGrid = document.getElementById('github-repos-grid');
-
-    async function fetchGitHubData() {
-        try {
-            // Fetch User Profile
-            const userResponse = await fetch(`https://api.github.com/users/${githubUsername}`);
-            const userData = await userResponse.json();
-
-            // Fetch Recent Repos
-            const reposResponse = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=6`);
-            const reposData = await reposResponse.json();
-
-            updateGitHubUI(userData, reposData);
-        } catch (error) {
-            console.error("Error fetching GitHub data:", error);
-            profileCard.innerHTML = `<p>Failed to load GitHub data. <a href="https://github.com/${githubUsername}" target="_blank">View Profile</a></p>`;
-        }
-    }
-
-    function updateGitHubUI(user, repos) {
-        // Update Profile Card
-        profileCard.innerHTML = `
-            <img src="${user.avatar_url}" alt="${user.name}" class="github-avatar">
-            <h3>${user.name || githubUsername}</h3>
-            <p>${user.bio || 'Full Stack Developer'}</p>
-            <div class="github-stats-grid">
-                <div class="stat-item">
-                    <h4>${user.public_repos}</h4>
-                    <p>Repos</p>
-                </div>
-                <div class="stat-item">
-                    <h4>${user.followers}</h4>
-                    <p>Followers</p>
-                </div>
-            </div>
-            <a href="${user.html_url}" target="_blank" class="btn btn-outline" style="margin-top: 2rem; width: 100%;">Visit Profile</a>
-        `;
-
-        // Update Repos Grid
-        reposGrid.innerHTML = repos.map(repo => `
-            <div class="repo-card reveal">
-                <div class="repo-header">
-                    <i class="fa-brands fa-github gold-text" style="font-size: 1.5rem;"></i>
-                    <div class="repo-stats">
-                        <span><i class="fa-regular fa-star"></i> ${repo.stargazers_count}</span>
-                    </div>
-                </div>
-                <div class="repo-body">
-                    <h3>${repo.name}</h3>
-                    <p>${repo.description || 'No description available for this project.'}</p>
-                </div>
-                <div class="repo-footer">
-                    <div class="repo-lang">
-                        <span class="lang-dot" style="background: ${getLanguageColor(repo.language)}"></span>
-                        <span>${repo.language || 'Mixed'}</span>
-                    </div>
-                    <a href="${repo.html_url}" target="_blank" class="link-btn">Repo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i></a>
-                </div>
-            </div>
-        `).join('');
-        
-        // Re-observe new elements for reveal animation
-        const newReveals = reposGrid.querySelectorAll('.reveal');
-        newReveals.forEach(el => revealObserver.observe(el));
-    }
-
-    function getLanguageColor(lang) {
-        const colors = {
-            'JavaScript': '#f1e05a',
-            'HTML': '#e34c26',
-            'CSS': '#563d7c',
-            'Python': '#3572A5',
-            'Java': '#b07219',
-            'C++': '#f34b7d',
-            'TypeScript': '#3178c6'
-        };
-        return colors[lang] || '#8e8e8e';
-    }
-
-    if (profileCard) {
-        fetchGitHubData();
-    }
-});
+}); // end DOMContentLoaded
