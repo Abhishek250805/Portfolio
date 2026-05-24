@@ -7,18 +7,25 @@
  * ================================================================
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+const initPortfolio = () => {
 
     // ── 0. Cinematic Preloader ────────────────────────────────
     const preloader = document.getElementById('preloader');
-    document.body.style.overflowY = 'hidden';
-
-    window.addEventListener('load', () => {
-        setTimeout(() => {
+    if (preloader) {
+        document.body.style.overflowY = 'hidden';
+        const hidePreloader = () => {
             preloader.classList.add('fade-out');
             document.body.style.overflowY = 'auto';
-        }, 1500);
-    });
+        };
+
+        if (document.readyState === 'complete') {
+            setTimeout(hidePreloader, 1500);
+        } else {
+            window.addEventListener('load', () => {
+                setTimeout(hidePreloader, 1500);
+            });
+        }
+    }
 
 
     // ── 1. Section Reveal (IntersectionObserver) ──────────────
@@ -293,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── 9. tsParticles — Floating Interactive Neural Network ────
     if (typeof tsParticles !== 'undefined') {
-        const particleCount = isTouchDevice ? 35 : 85;
+        const particleCount = isTouchDevice ? 20 : 45;
         tsParticles.load('tsparticles', {
             fpsLimit: 40, // Cap tsParticles FPS for buttery smooth performance!
             particles: {
@@ -311,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     type: "circle"
                 },
                 opacity: {
-                    value: { min: 0.15, max: 0.45 },
+                    value: { min: 0.08, max: 0.22 },
                     animation: {
                         enable: !isTouchDevice,
                         speed: 1,
@@ -325,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     enable: true,
                     distance: 140,
                     color: "#FF8C00", // Gold circuit connections
-                    opacity: 0.22,
+                    opacity: 0.09,
                     width: 1
                 },
                 move: {
@@ -352,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     grab: {
                         distance: 180,
                         links: {
-                            opacity: 0.48
+                            opacity: 0.22
                         }
                     }
                 }
@@ -361,4 +368,213 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // end DOMContentLoaded
+    // ── 10. Web Audio API HUD Sound Synthesizer ────────────────
+    let audioCtx = null;
+    let soundEnabled = false;
+    const soundToggle = document.getElementById('sound-toggle');
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    }
+
+    function playSound(type) {
+        if (!soundEnabled) return;
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'chirp') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, now);
+            osc.frequency.exponentialRampToValueAtTime(110, now + 0.08);
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            osc.start(now);
+            osc.stop(now + 0.08);
+        } else if (type === 'click') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(150, now);
+            osc.frequency.exponentialRampToValueAtTime(40, now + 0.04);
+            gain.gain.setValueAtTime(0.10, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+            osc.start(now);
+            osc.stop(now + 0.04);
+        }
+    }
+
+    if (soundToggle) {
+        soundToggle.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            initAudio();
+            if (soundEnabled) {
+                soundToggle.classList.add('active');
+                soundToggle.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND: ON';
+                setTimeout(() => playSound('click'), 100);
+            } else {
+                soundToggle.classList.remove('active');
+                soundToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND: OFF';
+            }
+        });
+    }
+
+    function attachSoundListeners() {
+        const targets = document.querySelectorAll('a, button, .skill-tag, .contact-link, .filter-btn, .btn-diag');
+        targets.forEach(el => {
+            el.addEventListener('mouseenter', () => playSound('chirp'), { passive: true });
+            el.addEventListener('click', () => playSound('click'), { passive: true });
+        });
+    }
+    attachSoundListeners();
+
+
+    // ── 11. Projects Tech Filter ────────────────────────────────
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards  = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterValue = btn.getAttribute('data-filter');
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            projectCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (filterValue === 'all' || cardCategory === filterValue) {
+                    card.classList.remove('hidden-card');
+                } else {
+                    card.classList.add('hidden-card');
+                }
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            }, 300);
+        });
+    });
+
+
+    // ── 12. Learn2Ride Expandable System Diagnostics Panel ──────
+    const btnDiag = document.getElementById('btn-diagnostics');
+    const diagPanel = document.getElementById('diagnostics-panel');
+
+    if (btnDiag && diagPanel) {
+        btnDiag.addEventListener('click', () => {
+            const active = diagPanel.classList.toggle('active');
+            btnDiag.setAttribute('aria-expanded', active ? 'true' : 'false');
+            diagPanel.setAttribute('aria-hidden', active ? 'false' : 'true');
+            btnDiag.innerHTML = active 
+                ? '<i class="fa-solid fa-square-minus" style="color: var(--gold);"></i> HIDE_METRICS' 
+                : '<i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> SYS_ANALYSIS';
+        });
+    }
+
+
+    // ── 13. Interactive Cyber Terminal Console ──────────────────
+    const termInput  = document.getElementById('terminal-input');
+    const termOutput = document.getElementById('terminal-output');
+    const termBody   = document.querySelector('.terminal-body');
+
+    if (termInput && termOutput) {
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const inputVal = termInput.value.trim();
+                termInput.value = '';
+                
+                if (inputVal.length > 0) {
+                    processTermCommand(inputVal);
+                }
+            }
+        });
+
+        function appendTermLine(text, isInput = false, color = '') {
+            const line = document.createElement('p');
+            line.className = 'term-msg';
+            if (color) line.style.color = color;
+            
+            if (isInput) {
+                line.innerHTML = `<span style="color: var(--gold-glow); font-weight: bold;">guest@ap-net:~$</span> ${escapeHTML(text)}`;
+            } else {
+                line.innerHTML = text;
+            }
+            termOutput.appendChild(line);
+            
+            if (termBody) {
+                termBody.scrollTop = termBody.scrollHeight;
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        function processTermCommand(cmd) {
+            const lowerCmd = cmd.toLowerCase().split(' ')[0];
+            appendTermLine(cmd, true);
+
+            setTimeout(() => {
+                switch (lowerCmd) {
+                    case 'help':
+                        appendTermLine('Available AP-NET Database commands:');
+                        appendTermLine('&nbsp;&nbsp;<span class="gold-text">bio</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Output developers system biography.');
+                        appendTermLine('&nbsp;&nbsp;<span class="gold-text">skills</span>&nbsp;&nbsp;&nbsp;- Diagnostic report on core technical stack.');
+                        appendTermLine('&nbsp;&nbsp;<span class="gold-text">projects</span>&nbsp;- Retrieve system links to FLAGSHIP works.');
+                        appendTermLine('&nbsp;&nbsp;<span class="gold-text">sound</span>&nbsp;&nbsp;&nbsp;&nbsp;- Toggle HUD synthesizer feedback audio.');
+                        appendTermLine('&nbsp;&nbsp;<span class="gold-text">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;- Purge console output buffers.');
+                        break;
+                    case 'clear':
+                        termOutput.innerHTML = '';
+                        break;
+                    case 'bio':
+                        appendTermLine('--- SYSTEM BIOGRAPHY REGISTER ---', false, 'var(--gold)');
+                        appendTermLine('Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Abhishek Pandey');
+                        appendTermLine('Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: BCA Scholar / Frontend Architect');
+                        appendTermLine('Core Focus&nbsp;: Premium responsive layouts & verified APIs.');
+                        appendTermLine('Description: Specialized in creating clean layouts, scalable UI frames, and turning high-stakes concepts into functional code.');
+                        break;
+                    case 'skills':
+                        appendTermLine('--- STACK DIAGNOSTIC REPORT ---', false, 'var(--gold)');
+                        appendTermLine('<span style="color:#00D9FF;">[FRONTEND]</span>: HTML5 | CSS3 | JS (ES6+) | React.js | Next.js');
+                        appendTermLine('<span style="color:#FF8C00;">[LANGUAGES]</span>: C | C++ | Java | Python | SQL | R');
+                        appendTermLine('<span style="color:#4ade80;">[SYSTEMS]</span> : Git | GitHub | Firebase | Gemini Pro API | VS Code');
+                        break;
+                    case 'projects':
+                        appendTermLine('--- RETRIEVING FLAGSHIP ARCHIVES ---', false, 'var(--gold)');
+                        appendTermLine('1. <span class="gold-text">Learn2Ride</span> (Currently Building driving school verified platform)');
+                        appendTermLine('2. <span class="gold-text">Amazon Premium UI</span> (E-Commerce visual optimization)');
+                        appendTermLine('3. <span class="gold-text">Weather Precision</span> (Real-time external API parser)');
+                        appendTermLine('4. <span class="gold-text">Kashi Explored</span> (Interactive Varanasi storytelling database)');
+                        break;
+                    case 'sound':
+                        if (soundToggle) soundToggle.click();
+                        appendTermLine(`System audio toggled. HUD feedback: ${soundEnabled ? 'ONLINE' : 'OFFLINE'}`, false, soundEnabled ? '#4ade80' : 'var(--text-muted)');
+                        break;
+                    default:
+                        appendTermLine(`AP-NET command parser error: "${escapeHTML(cmd)}" command not recognized. Type <span class="gold-text">help</span> to list query system registers.`, false, '#FF4D4D');
+                }
+                
+                if (termBody) {
+                    termBody.scrollTop = termBody.scrollHeight;
+                }
+            }, 100);
+        }
+    }
+
+}; // end initPortfolio
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolio);
+} else {
+    initPortfolio();
+}
