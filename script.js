@@ -17,14 +17,9 @@ const initPortfolio = () => {
             preloader.classList.add('fade-out');
             document.body.style.overflowY = 'auto';
         };
-
-        if (document.readyState === 'complete') {
-            setTimeout(hidePreloader, 1500);
-        } else {
-            window.addEventListener('load', () => {
-                setTimeout(hidePreloader, 1500);
-            });
-        }
+        // Cinematic timeout (1.5s) guarantees preloader resolution
+        // independent of slow CDNs, offline modes, or missing local assets.
+        setTimeout(hidePreloader, 1500);
     }
 
 
@@ -439,7 +434,6 @@ const initPortfolio = () => {
 
     // ── 11. Projects Tech Filter ────────────────────────────────
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards  = document.querySelectorAll('.project-card');
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
