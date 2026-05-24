@@ -146,10 +146,7 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <div class="nav-actions" style="display: flex; gap: 1rem; align-items: center;">
-                <button id="sound-toggle" class="sound-btn" aria-label="Toggle HUD Audio">
-                    <i class="fa-solid fa-volume-xmark"></i> SOUND: OFF
-                </button>
+            <div class="nav-actions">
                 <button class="menu-toggle" aria-label="Toggle Menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -176,10 +173,8 @@
                         </div>
                     </div>
                     <h1 class="name">Abhishek <span class="gold-text">Pandey</span></h1>
-                    <h2 class="title">✨Frontend Architect &amp; UI Enthusiast</h2>
-                    <p class="tagline">Crafting modern and responsive web experiences with creativity and clean design.<br>
-Passionate about frontend development, UI aesthetics, and building impactful digital products.<br>
-Continuously learning and turning ideas into functional, user-friendly websites.</p>
+                    <h2 class="title">Frontend Architect &amp; BCA Scholar</h2>
+                    <p class="tagline">Crafting premium digital experiences with a focus on luxury aesthetics and functional excellence.</p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-gold">Explore Work</a>
                         <a href="ResumeAP.pdf" download class="btn btn-outline cv-btn"><i class="fa-solid fa-download"></i> Resume</a>
@@ -187,7 +182,10 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                     </div>
                 </div>
             </div>
-
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+                <p>Scroll to explore</p>
+            </div>
         </section>
 
         <!-- Technologies & Tools Marquee -->
@@ -317,15 +315,9 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                     <span class="subtitle">Showcase</span>
                     <h2 class="section-title">Featured <span class="gold-text">Creations</span></h2>
                 </div>
-                <div class="filter-container reveal">
-                    <button class="filter-btn active" data-filter="all">ALL_SYSTEMS</button>
-                    <button class="filter-btn" data-filter="flagship">FLAGSHIP</button>
-                    <button class="filter-btn" data-filter="ui">PREMIUM_UI</button>
-                    <button class="filter-btn" data-filter="api">INTELLIGENT_APIs</button>
-                </div>
                 <div class="projects-grid">
                     <!-- Featured Project: Learn2Ride -->
-                    <div class="project-card featured glass-card reveal" data-category="flagship">
+                    <div class="project-card featured glass-card reveal">
                         <div class="project-info">
                             <div class="project-header-meta">
                                 <span class="project-badge">Flagship Project</span>
@@ -339,18 +331,8 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                             <div class="project-tech">
                                 <span>JS</span><span>API</span><span>UX</span>
                             </div>
-                            <div class="project-cta" style="display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap;">
+                            <div class="project-cta">
                                 <a href="#" class="link-btn">View Project <i class="fa-solid fa-arrow-right-long"></i></a>
-                                <button class="btn-diag link-btn" id="btn-diagnostics" aria-expanded="false"><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> SYS_ANALYSIS</button>
-                            </div>
-                            <!-- Expandable Diagnostics/Case Study Panel -->
-                            <div class="diagnostics-panel" id="diagnostics-panel" aria-hidden="true">
-                                <div class="diag-header"><i class="fa-solid fa-terminal text-gold" style="color: var(--gold); margin-right: 5px;"></i> Learn2Ride Architecture Metrics</div>
-                                <div class="diag-body">
-                                    <p><strong>🚨 The Challenge:</strong> Traditional driving school systems suffer from high friction booking, zero real-time trainer verification, and offline coordination vulnerabilities.</p>
-                                    <p><strong>🛠️ Solution Decisions:</strong> Engineered a highly responsive frontend connecting verified trainers using REST API endpoints. Added reactive calendar management for seamless session coordination.</p>
-                                    <p><strong>⚡ Tech Wins:</strong> Reduced schedule matching times by 65%. Zero external SQL calls per session list render. Clean UI with fully accessible layouts.</p>
-                                </div>
                             </div>
                         </div>
                         <div class="project-visual">
@@ -361,7 +343,7 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                     </div>
 
                     <!-- Other Projects -->
-                    <div class="project-card glass-card reveal" data-category="ui">
+                    <div class="project-card glass-card reveal">
                         <h3>Amazon Premium UI</h3>
                         <p>Pixel-perfect recreation of the e-commerce giant's interface, optimized for luxury feel.</p>
                         <div class="project-cta">
@@ -374,7 +356,7 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                         </div>
                     </div>
 
-                    <div class="project-card glass-card reveal" data-category="api">
+                    <div class="project-card glass-card reveal">
                         <h3>Weather Precision</h3>
                         <p>Real-time data visualization using open APIs with a minimalist aesthetic.</p>
                         <div class="project-cta">
@@ -387,7 +369,7 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                         </div>
                     </div>
 
-                    <div class="project-card glass-card reveal" data-category="ui">
+                    <div class="project-card glass-card reveal">
                         <h3>Kashi - The Unknown Fact</h3>
                         <p>An immersive digital exploration of Varanasi, uncovering hidden historical facts and spiritual depth through interactive storytelling.</p>
                         <div class="project-cta">
@@ -424,37 +406,6 @@ Continuously learning and turning ideas into functional, user-friendly websites.
             </div>
         </section>
 
-        <!-- Cyber Terminal Console Section -->
-        <section id="terminal-section" class="terminal-section section">
-            <div class="container">
-                <div class="section-header reveal">
-                    <span class="subtitle">Interact</span>
-                    <h2 class="section-title">AP-NET&nbsp;<span class="gold-text">Terminal</span></h2>
-                </div>
-                <div class="terminal-container glass-card reveal" style="max-width: 900px; margin: 0 auto; padding: 0;">
-                    <div class="terminal-header" style="background: rgba(11, 11, 15, 0.90); padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 217, 255, 0.15); border-radius: 24px 24px 0 0;">
-                        <div class="terminal-buttons" style="display: flex; gap: 8px;">
-                            <span class="t-btn red" style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
-                            <span class="t-btn yellow" style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
-                            <span class="t-btn green" style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
-                        </div>
-                        <div class="terminal-title" style="font-family: 'Courier New', monospace; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">SYSOP@AP-NET:~</div>
-                    </div>
-                    <div class="terminal-body" style="background: rgba(8, 8, 12, 0.95); padding: 1.5rem; height: 320px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.5; color: #a4b3c6; border-radius: 0 0 24px 24px;">
-                        <div class="terminal-output" id="terminal-output">
-                            <p class="term-msg" style="color: var(--gold); font-weight: 600;">AP-NET INTERACTIVE HUD TERMINAL [Version 3.7.1]</p>
-                            <p class="term-msg">Type <span class="gold-text">help</span> to list available commands and interrogate the profile database.</p>
-                            <p class="term-msg" style="margin-bottom: 1rem;">&nbsp;</p>
-                        </div>
-                        <div class="terminal-input-line" style="display: flex; align-items: center; gap: 8px;">
-                            <span class="terminal-prompt" style="color: var(--gold-glow); font-weight: bold;">guest@ap-net:~$</span>
-                            <input type="text" id="terminal-input" autocomplete="off" style="flex: 1; background: transparent; border: none; outline: none; color: #f8fafc; font-family: inherit; font-size: inherit;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Certificates Section -->
         <section id="certificates" class="certificates section">
             <div class="container">
@@ -469,11 +420,6 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                             <h3>Python Programming</h3>
                             <p>Core language proficiency and automation logic.</p>
                         </div>
-                        <!-- Space/Frame for Certificate Image -->
-                        <div class="cert-visual-frame">
-                            <img src="image/certificates/python.jpg" alt="Python Programming Certificate" class="cert-img" onerror="this.src='./image/cert-placeholder.png';">
-                            <span class="cert-overlay-msg"><i class="fa-regular fa-image" style="color: var(--gold);"></i> Certificate Frame</span>
-                        </div>
                     </div>
                     <div class="cert-item glass-card reveal">
                         <div class="cert-icon"><i class="fa-solid fa-database gold-text"></i></div>
@@ -481,22 +427,12 @@ Continuously learning and turning ideas into functional, user-friendly websites.
                             <h3>Data Structures</h3>
                             <p>Algorithmic thinking and efficient data management.</p>
                         </div>
-                        <!-- Space/Frame for Certificate Image -->
-                        <div class="cert-visual-frame">
-                            <img src="image/certificates/dsa.jpg" alt="Data Structures Certificate" class="cert-img" onerror="this.src='./image/cert-placeholder.png';">
-                            <span class="cert-overlay-msg"><i class="fa-regular fa-image" style="color: var(--gold);"></i> Certificate Frame</span>
-                        </div>
                     </div>
                     <div class="cert-item glass-card reveal">
                         <div class="cert-icon"><i class="fa-solid fa-layer-group gold-text"></i></div>
                         <div class="cert-details">
                             <h3>Full Stack Foundations</h3>
                             <p>Comprehensive web development methodologies.</p>
-                        </div>
-                        <!-- Space/Frame for Certificate Image -->
-                        <div class="cert-visual-frame">
-                            <img src="image/certificates/fullstack.jpg" alt="Full Stack Foundations Certificate" class="cert-img" onerror="this.src='./image/cert-placeholder.png';">
-                            <span class="cert-overlay-msg"><i class="fa-regular fa-image" style="color: var(--gold);"></i> Certificate Frame</span>
                         </div>
                     </div>
                 </div>
