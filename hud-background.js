@@ -202,7 +202,7 @@
             /* Core */
             ctx.beginPath();
             ctx.arc(n.x, n.y, r, 0, 6.283);
-            ctx.fillStyle = col + (0.50 + p * 0.35) + ')';
+            ctx.fillStyle = col + (0.25 + p * 0.25) + ')';
             ctx.fill();
         }
 
@@ -217,7 +217,7 @@
             if (p.t < 0.5) { px = a.x; py = a.y + (b.y - a.y) * (p.t * 2); }
             else            { px = a.x + (b.x - a.x) * ((p.t - 0.5) * 2); py = b.y; }
             const s = p.sz;
-            ctx.fillStyle = (p.org ? ORG : CYN) + '0.82)';
+            ctx.fillStyle = (p.org ? ORG : CYN) + '0.45)';
             ctx.fillRect(px - s, py - s, s * 2, s * 2);
         }
 
