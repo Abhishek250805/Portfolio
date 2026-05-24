@@ -7,7 +7,7 @@
  * ================================================================
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+const initPortfolio = () => {
 
     // ── 0. Cinematic Preloader ────────────────────────────────
     const preloader = document.getElementById('preloader');
@@ -571,4 +571,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-}); // end DOMContentLoaded
+}; // end initPortfolio
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolio);
+} else {
+    initPortfolio();
+}
