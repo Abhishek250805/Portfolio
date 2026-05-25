@@ -457,7 +457,7 @@ a, button, .skill-tag, .contact-link { cursor: pointer; }
 @media (min-width: 1025px) { body, a, button, .skill-tag, .contact-link { cursor: none !important; } }
 
 /* ── Hero ───────────────────────────────────────────────────── */
-.hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding-top: 200px; }
 .hero-split { display: flex; align-items: center; gap: 5rem; text-align: left; }
 .hero-left { flex-shrink: 0; }
 .hero-right { flex: 1; }
