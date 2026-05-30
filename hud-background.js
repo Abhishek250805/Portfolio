@@ -18,10 +18,10 @@
                 || navigator.maxTouchPoints > 0;
 
     const FRAME_MS  = MOBILE ? 50  : 33;   /* 20 / 30 fps        */
-    const NODE_CNT  = MOBILE ? 7   : 11;
-    const LINK_DIST = MOBILE ? 170 : 210;
-    const PTCL_CNT  = MOBILE ? 4   : 8;
-    const TRAIL_LEN = MOBILE ? 0   : 14;
+    const NODE_CNT  = MOBILE ? 6   : 9;     /* Optimized node count to save CPU cycles */
+    const LINK_DIST = MOBILE ? 150 : 180;   /* Optimized connection bounds */
+    const PTCL_CNT  = MOBILE ? 3   : 5;     /* Reduced concurrent energy particles */
+    const TRAIL_LEN = MOBILE ? 0   : 6;     /* Significantly shorter cursor trail to free GPU rendering */
 
     /* Pre-computed RGBA prefixes — NO string ops in loop */
     const ORG = 'rgba(255,140,0,';

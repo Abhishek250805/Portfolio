@@ -86,12 +86,12 @@ img, video, iframe, canvas {
     pointer-events: none;
     z-index: -4;
     overflow: hidden;
-    filter: blur(70px);
+    filter: blur(20px); /* Massively optimized blur radius to eliminate scroll repainting lag */
     opacity: 0.18;
     contain: strict;
     will-change: transform;
 }
-@media (max-width: 768px) { .blob-container { filter: blur(40px); opacity: 0.12; } }
+@media (max-width: 768px) { .blob-container { filter: blur(10px); opacity: 0.12; } }
 
 .blob {
     position: absolute;
@@ -296,15 +296,15 @@ body::after {
 }
 
 /* ── Hover Proximity States (js adds .hovered) ──────────────── */
-.gear-center.hovered   { animation-duration: 16s !important; filter: drop-shadow(0 0 22px rgba(255,140,0,0.80)) drop-shadow(0 0 50px rgba(255,140,0,0.22)) !important; }
-.gear-left.hovered     { animation-duration: 12s !important; filter: drop-shadow(0 0 18px rgba(245,176,65,0.78)) drop-shadow(0 0 40px rgba(245,176,65,0.18)) !important; }
-.gear-right.hovered    { animation-duration: 14s !important; filter: drop-shadow(0 0 22px rgba(0,217,255,0.85)) drop-shadow(0 0 52px rgba(0,217,255,0.22)) !important; }
-.gear-bottom-left.hovered  { animation-duration: 10s !important; filter: drop-shadow(0 0 16px rgba(255,140,0,0.72)) !important; }
-.gear-bottom-right.hovered { animation-duration: 11s !important; filter: drop-shadow(0 0 18px rgba(0,217,255,0.75)) !important; }
-.ring-center.hovered   { animation-duration: 22s !important; filter: drop-shadow(0 0 16px rgba(0,217,255,0.70)) !important; }
-.ring-left.hovered     { animation-duration: 20s !important; filter: drop-shadow(0 0 14px rgba(255,140,0,0.65)) !important; }
-.ring-right.hovered    { animation-duration: 18s !important; filter: drop-shadow(0 0 16px rgba(0,217,255,0.70)) !important; }
-.ring-br.hovered       { animation-duration: 14s !important; filter: drop-shadow(0 0 14px rgba(245,176,65,0.65)) !important; }
+.gear-center.hovered   { animation-duration: 16s !important; filter: drop-shadow(0 0 10px rgba(255,140,0,0.50)) !important; }
+.gear-left.hovered     { animation-duration: 12s !important; filter: drop-shadow(0 0 8px rgba(245,176,65,0.50)) !important; }
+.gear-right.hovered    { animation-duration: 14s !important; filter: drop-shadow(0 0 10px rgba(0,217,255,0.50)) !important; }
+.gear-bottom-left.hovered  { animation-duration: 10s !important; filter: drop-shadow(0 0 8px rgba(255,140,0,0.40)) !important; }
+.gear-bottom-right.hovered { animation-duration: 11s !important; filter: drop-shadow(0 0 8px rgba(0,217,255,0.40)) !important; }
+.ring-center.hovered   { animation-duration: 22s !important; filter: drop-shadow(0 0 6px rgba(0,217,255,0.30)) !important; }
+.ring-left.hovered     { animation-duration: 20s !important; filter: drop-shadow(0 0 6px rgba(255,140,0,0.30)) !important; }
+.ring-right.hovered    { animation-duration: 18s !important; filter: drop-shadow(0 0 6px rgba(0,217,255,0.30)) !important; }
+.ring-br.hovered       { animation-duration: 14s !important; filter: drop-shadow(0 0 6px rgba(245,176,65,0.30)) !important; }
 
 /* ── Rotation Keyframes ─────────────────────────────────────── */
 @keyframes rotateCW  { to { transform: rotate( 360deg); } }

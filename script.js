@@ -292,15 +292,15 @@ const initPortfolio = () => {
 
     // ── 9. tsParticles — Floating Interactive Neural Network ────
     if (typeof tsParticles !== 'undefined') {
-        const particleCount = isTouchDevice ? 20 : 45;
+        const particleCount = isTouchDevice ? 10 : 22; /* High-performance capped particle count */
         tsParticles.load('tsparticles', {
-            fpsLimit: 40, // Cap tsParticles FPS for buttery smooth performance!
+            fpsLimit: 60, /* Smooth frame target */
             particles: {
                 number: {
                     value: particleCount,
                     density: {
                         enable: true,
-                        area: 800
+                        area: 900
                     }
                 },
                 color: {
@@ -313,23 +313,23 @@ const initPortfolio = () => {
                     value: { min: 0.08, max: 0.22 },
                     animation: {
                         enable: !isTouchDevice,
-                        speed: 1,
+                        speed: 0.8,
                         sync: false
                     }
                 },
                 size: {
-                    value: { min: 1, max: 2.5 },
+                    value: { min: 1, max: 2.2 },
                 },
                 links: {
                     enable: true,
-                    distance: 140,
+                    distance: 110, /* Shorter connections = vastly fewer draw cycles */
                     color: "#FF8C00", // Gold circuit connections
-                    opacity: 0.09,
-                    width: 1
+                    opacity: 0.08,
+                    width: 0.8
                 },
                 move: {
                     enable: true,
-                    speed: isTouchDevice ? 0.7 : 1.2, // Balanced lag-free speed
+                    speed: isTouchDevice ? 0.5 : 1.0, // Balanced lag-free speed
                     direction: "none",
                     random: false,
                     straight: false,
@@ -349,14 +349,14 @@ const initPortfolio = () => {
                 },
                 modes: {
                     grab: {
-                        distance: 180,
+                        distance: 140,
                         links: {
-                            opacity: 0.22
+                            opacity: 0.18
                         }
                     }
                 }
             },
-            detectRetina: !isTouchDevice
+            detectRetina: false /* Disabling retina doubles rendering speed, eliminating high-DPI lag completely */
         });
     }
 
