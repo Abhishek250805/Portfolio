@@ -150,11 +150,8 @@ const initPortfolio = () => {
 
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            const open = navLinks.style.display === 'flex';
-            navLinks.style.display = open ? 'none' : 'flex';
-            const bars = menuToggle.querySelectorAll('.bar');
-            bars[0].style.transform = open ? 'none' : 'rotate(45deg) translate(5px, 5px)';
-            bars[1].style.transform = open ? 'none' : 'rotate(-45deg) translate(5px, -5px)';
+            const active = menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active', active);
         });
     }
 
@@ -168,8 +165,8 @@ const initPortfolio = () => {
             if (el) {
                 window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
                 if (navLinks && window.innerWidth <= 768) {
-                    navLinks.style.display = 'none';
-                    menuToggle.querySelectorAll('.bar').forEach(b => b.style.transform = 'none');
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
                 }
             }
         });
