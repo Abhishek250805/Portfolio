@@ -116,6 +116,28 @@ const initPortfolio = () => {
     }
 
 
+    // ── 3b. Active Navigation Highlighting ─────────────────────
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksList = document.querySelectorAll('.nav-links a');
+    if (sections.length > 0 && navLinksList.length > 0) {
+        const activeNavObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinksList.forEach(link => {
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('nav-active');
+                        } else {
+                            link.classList.remove('nav-active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '-15% 0px -60% 0px' });
+        sections.forEach(sec => activeNavObserver.observe(sec));
+    }
+
+
     // ── 4. 3D Glass Tilt (desktop only) ──────────────────────
     if (!isTouchDevice) {
         document.querySelectorAll('.glass-card').forEach(card => {
@@ -464,22 +486,25 @@ const initPortfolio = () => {
                     case 'bio':
                         appendTermLine('--- SYSTEM BIOGRAPHY REGISTER ---', false, 'var(--gold)');
                         appendTermLine('Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Abhishek Pandey');
-                        appendTermLine('Status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: BCA Scholar / Frontend Architect');
-                        appendTermLine('Core Focus&nbsp;: Premium responsive layouts & verified APIs.');
-                        appendTermLine('Description: Specialized in creating clean layouts, scalable UI frames, and turning high-stakes concepts into functional code.');
+                        appendTermLine('Role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Frontend Developer &amp; Full-Stack Enthusiast');
+                        appendTermLine('Education&nbsp;&nbsp;: Bachelor of Computer Applications (2023–2026)');
+                        appendTermLine('CGPA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 7.5 / 10.0');
+                        appendTermLine('Location&nbsp;&nbsp;&nbsp;: Mirzapur, Uttar Pradesh');
+                        appendTermLine('Bio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Passionate BCA student building modern, responsive web apps using React, Next.js, Node.js, and MongoDB.');
                         break;
                     case 'skills':
                         appendTermLine('--- STACK DIAGNOSTIC REPORT ---', false, 'var(--gold)');
-                        appendTermLine('<span style="color:#00D9FF;">[FRONTEND]</span>: HTML5 | CSS3 | JS (ES6+) | React.js | Next.js');
-                        appendTermLine('<span style="color:#FF8C00;">[LANGUAGES]</span>: C | C++ | Java | Python | SQL | R');
-                        appendTermLine('<span style="color:#4ade80;">[SYSTEMS]</span> : Git | GitHub | Firebase | Gemini Pro API | VS Code');
+                        appendTermLine('<span style="color:#FFD700;">[FRONTEND]</span>: HTML5 | CSS3 | JavaScript | React.js | Next.js');
+                        appendTermLine('<span style="color:#FF8C00;">[BACKEND]</span> : Node.js | Express.js | REST APIs');
+                        appendTermLine('<span style="color:#a4b3c6;">[DATABASE]</span>: MongoDB');
+                        appendTermLine('<span style="color:#00D9FF;">[LANGUAGES]</span>: C | C++ | Java | Python');
+                        appendTermLine('<span style="color:#4ade80;">[TOOLS]</span>&nbsp;&nbsp;&nbsp;&nbsp;: Git | GitHub | VS Code');
                         break;
                     case 'projects':
                         appendTermLine('--- RETRIEVING FLAGSHIP ARCHIVES ---', false, 'var(--gold)');
-                        appendTermLine('1. <span class="gold-text">Learn2Ride</span> (Currently Building driving school verified platform)');
-                        appendTermLine('2. <span class="gold-text">Amazon Premium UI</span> (E-Commerce visual optimization)');
-                        appendTermLine('3. <span class="gold-text">Weather Precision</span> (Real-time external API parser)');
-                        appendTermLine('4. <span class="gold-text">Kashi Explored</span> (Interactive Varanasi storytelling database)');
+                        appendTermLine('1. <span class="gold-text">Learn_2_Ride</span> (Full-stack driving learning platform | Next.js, Express, MongoDB)');
+                        appendTermLine('2. <span class="gold-text">AuraCalc</span> (Advanced scientific calculator with graph plotting | HTML, CSS, JS)');
+                        appendTermLine('3. <span class="gold-text">Portfolio</span> (Modern developer responsive showcase environment | HTML, CSS, JS)');
                         break;
                     case 'sound':
                         if (soundToggle) soundToggle.click();
