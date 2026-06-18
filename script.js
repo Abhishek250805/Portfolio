@@ -52,7 +52,7 @@ const initPortfolio = () => {
             if (hovering) {
                 dot.style.transform    = 'translate(-50%,-50%) scale(1.6)';
                 outline.style.transform = 'translate(-50%,-50%) scale(2.0)';
-                outline.style.borderColor = '#00D9FF';
+                outline.style.borderColor = '#FFD700';
             } else {
                 dot.style.transform    = 'translate(-50%,-50%) scale(1)';
                 outline.style.transform = 'translate(-50%,-50%) scale(1)';
@@ -80,6 +80,7 @@ const initPortfolio = () => {
     const progressBar = document.querySelector('.scroll-progress-bar');
     const navbar      = document.querySelector('.navbar');
     const scrollTopBtn = document.getElementById('scroll-top');
+    const logoWatermark = document.querySelector('.logo-watermark'); // Cached query to prevent layout thrashing
     let lastY   = window.scrollY;
     let ticking = false;
 
@@ -99,9 +100,10 @@ const initPortfolio = () => {
                 if (lastY > 500) scrollTopBtn.classList.add('visible');
                 else             scrollTopBtn.classList.remove('visible');
 
-                // Logo watermark parallax
-                const wm = document.querySelector('.logo-watermark');
-                if (wm) wm.style.transform = `translate(-50%, calc(-50% + ${lastY * 0.15}px))`;
+                // Logo watermark parallax (desktop viewport only for smooth scroll performance)
+                if (logoWatermark && window.innerWidth > 768) {
+                    logoWatermark.style.transform = `translate(-50%, calc(-50% + ${lastY * 0.15}px))`;
+                }
 
                 ticking = false;
             });
@@ -290,75 +292,7 @@ const initPortfolio = () => {
 
     if (profileCard) fetchGitHub();
 
-    // ── 9. tsParticles — Floating Interactive Neural Network ────
-    if (typeof tsParticles !== 'undefined') {
-        const particleCount = isTouchDevice ? 10 : 22; /* High-performance capped particle count */
-        tsParticles.load('tsparticles', {
-            fpsLimit: 60, /* Smooth frame target */
-            particles: {
-                number: {
-                    value: particleCount,
-                    density: {
-                        enable: true,
-                        area: 900
-                    }
-                },
-                color: {
-                    value: ["#FF8C00", "#00D9FF"] // Gold and Cyan alternating nodes
-                },
-                shape: {
-                    type: "circle"
-                },
-                opacity: {
-                    value: { min: 0.08, max: 0.22 },
-                    animation: {
-                        enable: !isTouchDevice,
-                        speed: 0.8,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: { min: 1, max: 2.2 },
-                },
-                links: {
-                    enable: true,
-                    distance: 110, /* Shorter connections = vastly fewer draw cycles */
-                    color: "#FF8C00", // Gold circuit connections
-                    opacity: 0.08,
-                    width: 0.8
-                },
-                move: {
-                    enable: true,
-                    speed: isTouchDevice ? 0.5 : 1.0, // Balanced lag-free speed
-                    direction: "none",
-                    random: false,
-                    straight: false,
-                    outModes: {
-                        default: "out"
-                    }
-                }
-            },
-            interactivity: {
-                detectsOn: "window",
-                events: {
-                    onHover: {
-                        enable: !isTouchDevice,
-                        mode: "grab"
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        links: {
-                            opacity: 0.18
-                        }
-                    }
-                }
-            },
-            detectRetina: false /* Disabling retina doubles rendering speed, eliminating high-DPI lag completely */
-        });
-    }
+    // tsParticles section removed for performance optimization
 
     // ── 10. Web Audio API HUD Sound Synthesizer ────────────────
     let audioCtx = null;

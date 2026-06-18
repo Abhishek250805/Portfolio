@@ -28,90 +28,8 @@
         </div>
     </div>
 
-    <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
-    <!--  LAYER 0 — HUD Circuit Canvas  (drawn via JS)      -->
-    <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
-    <canvas id="hud-canvas" aria-hidden="true"></canvas>
-
-    <!-- ░░ LAYER 1 — Ambient Blobs (Aurora mesh gradient) ░░ -->
-    <div class="blob-container" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-
     <!-- ░░ LAYER 2 — Cyber Grid ░░ -->
     <div class="cyber-grid" aria-hidden="true"></div>
-
-    <!-- ░░ LAYER 3 — Rotating Gears & HUD Rings Mechanism ░░ -->
-    <div class="cyber-gears-container" aria-hidden="true">
-
-        <!-- Centre Cluster: Large orange gear + cyan HUD ring -->
-        <div class="gear-wrapper center-wrapper">
-            <div class="gear gear-center"></div>
-            <div class="hud-ring ring-center"></div>
-        </div>
-
-        <!-- Left Cluster: Amber gear + orange HUD ring -->
-        <div class="gear-wrapper left-wrapper">
-            <div class="gear gear-left"></div>
-            <div class="hud-ring ring-left"></div>
-        </div>
-
-        <!-- Right Cluster: Cyan gear + cyan HUD ring -->
-        <div class="gear-wrapper right-wrapper">
-            <div class="gear gear-right"></div>
-            <div class="hud-ring ring-right"></div>
-        </div>
-
-        <!-- Bottom-right cluster: amber ring -->
-        <div class="gear-wrapper br-wrapper">
-            <div class="hud-ring ring-br"></div>
-        </div>
-
-        <!-- Scattered single gears (no wrapper needed) -->
-        <div class="gear gear-bottom-left"></div>
-        <div class="gear gear-bottom-right"></div>
-    </div>
-
-    <!-- ░░ LAYER 4 — HUD Corner Brackets ░░ -->
-    <div class="hud-corner hud-corner-tl" aria-hidden="true"></div>
-    <div class="hud-corner hud-corner-tr" aria-hidden="true"></div>
-    <div class="hud-corner hud-corner-bl" aria-hidden="true"></div>
-    <div class="hud-corner hud-corner-br" aria-hidden="true"></div>
-
-    <!-- ░░ LAYER 5 — HUD Data Readout Strips ░░ -->
-    <div class="hud-readout hud-readout-left" aria-hidden="true">
-        SYS&nbsp;STATUS&nbsp;▸&nbsp;ONLINE<br>
-        CPU&nbsp;▸&nbsp;24%<br>
-        MEM&nbsp;▸&nbsp;1.2&nbsp;GB<br>
-        NET&nbsp;▸&nbsp;ACTIVE<br>
-        UPTIME&nbsp;▸&nbsp;99.9%<br>
-        BUILD&nbsp;▸&nbsp;v3.7.1
-    </div>
-    <div class="hud-readout hud-readout-right" aria-hidden="true">
-        RENDER&nbsp;▸&nbsp;60&nbsp;FPS<br>
-        PARTICLES&nbsp;▸&nbsp;90<br>
-        NODES&nbsp;▸&nbsp;22<br>
-        EDGES&nbsp;▸&nbsp;LIVE<br>
-        PARALLAX&nbsp;▸&nbsp;ON<br>
-        MODE&nbsp;▸&nbsp;HUD
-    </div>
-
-    <!-- ░░ LAYER 6 — Dual Scanning Bars ░░ -->
-    <div class="scanning-bar"   aria-hidden="true"></div>
-    <div class="scanning-bar-2" aria-hidden="true"></div>
-
-    <!-- ░░ LAYER 7 — Glass Noise + Vignette + Corner Glows ░░ -->
-    <div class="noise-overlay"  aria-hidden="true"></div>
-    <div class="vignette-overlay" aria-hidden="true"></div>
-    <div class="corner-glows"   aria-hidden="true"></div>
-
-    <!-- ░░ LAYER 8 — tsParticles (floating glowing nodes) ░░ -->
-    <div id="tsparticles" aria-hidden="true"></div>
-
-    <!-- ░░ LAYER 9 — Cursor Light Trail Canvas ░░ -->
-    <canvas id="trail-canvas" aria-hidden="true"></canvas>
 
     <!-- ░░ LAYER 10 — Large Logo Watermark (behind Hero) ░░ -->
     <div class="logo-watermark" aria-hidden="true">
@@ -639,10 +557,6 @@ Continuously learning and turning ideas into functional, user-friendly websites.
     </button>
 
     <!-- ░░ SCRIPTS ░░ -->
-    <!-- tsParticles Library for Interactive Neural Network -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-    <!-- HUD Background Engine (canvas circuits + particles) -->
-    <script src="hud-background.js"></script>
     <!-- Main portfolio interactions -->
     <script src="script.js"></script>
 </body>

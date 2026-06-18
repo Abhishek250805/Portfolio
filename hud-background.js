@@ -141,16 +141,48 @@
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(resize, 200);
+        resizeTimer = setTimeout(() => {
+            resize();
+            startLoopIfNeeded();
+        }, 200);
     }, { passive: true });
 
     /* ── RAF loop with frame-rate cap ────────────────────────── */
     let lastT = 0;
+    let isLoopRunning = false;
+    let animId = null;
+
     function loop(t) {
-        requestAnimationFrame(loop);
+        if (window.innerWidth <= 768) {
+            isLoopRunning = false;
+            animId = null;
+            ctx.clearRect(0, 0, W, H);
+            return;
+        }
+        animId = requestAnimationFrame(loop);
         if (t - lastT < FRAME_MS) return;
         lastT = t;
         tick();
+    }
+
+    function startLoopIfNeeded() {
+        const isMobileViewport = window.innerWidth <= 768;
+        if (!isMobileViewport) {
+            if (!isLoopRunning) {
+                isLoopRunning = true;
+                lastT = performance.now();
+                animId = requestAnimationFrame(loop);
+            }
+        } else {
+            if (isLoopRunning) {
+                isLoopRunning = false;
+                if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            }
+            ctx.clearRect(0, 0, W, H);
+        }
     }
 
     /* ── Main tick ───────────────────────────────────────────── */
@@ -264,6 +296,6 @@
     resize();
     cacheDom();
     window.addEventListener('load', () => { cacheDom(); rebuildParticles(); });
-    requestAnimationFrame(loop);
+    startLoopIfNeeded();
 
 })();
