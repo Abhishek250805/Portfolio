@@ -116,25 +116,25 @@ const initPortfolio = () => {
     }
 
 
-    // ── 3b. Active Navigation Highlighting ─────────────────────
-    const sections = document.querySelectorAll('section[id]');
+    // ── 3b. Active Navigation Highlighting (Multi-page) ───────
     const navLinksList = document.querySelectorAll('.nav-links a');
-    if (sections.length > 0 && navLinksList.length > 0) {
-        const activeNavObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navLinksList.forEach(link => {
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('nav-active');
-                        } else {
-                            link.classList.remove('nav-active');
-                        }
-                    });
-                }
-            });
-        }, { threshold: 0.12, rootMargin: '-15% 0px -60% 0px' });
-        sections.forEach(sec => activeNavObserver.observe(sec));
+    if (navLinksList.length > 0) {
+        const path = window.location.pathname;
+        const page = path.split('/').pop().replace('.html', '');
+        
+        navLinksList.forEach(link => {
+            const href = link.getAttribute('href');
+            const hrefPage = href.split('/').pop().split('#')[0].replace('.html', '');
+            
+            if (
+                (page === '' || page === 'index' || page === 'portfolio') && (hrefPage === 'index' || hrefPage === '') ||
+                page === hrefPage
+            ) {
+                link.classList.add('nav-active');
+            } else {
+                link.classList.remove('nav-active');
+            }
+        });
     }
 
 

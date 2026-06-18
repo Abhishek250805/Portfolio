@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Terminal | Abhishek Pandey</title>
+    <meta name="description" content="Get in touch with Abhishek Pandey. Contact form, location information, and interactive profile database terminal.">
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ░░ CINEMATIC PRELOADER ░░ -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="image/Logo.png" alt="Logo" class="preloader-logo">
+            <div class="preloader-bar-container">
+                <div class="preloader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░ LAYER 2 — Cyber Grid ░░ -->
+    <div class="cyber-grid" aria-hidden="true"></div>
+
+    <!-- ░░ Custom Luxury Cursor ░░ -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="scroll-progress-container">
+            <div class="scroll-progress-bar"></div>
+        </div>
+        <div class="nav-container container">
+            <a href="index.html" class="logo">
+                <img src="image/Logo.png" alt="Abhishek Pandey Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions" style="display: flex; gap: 1rem; align-items: center;">
+                <button id="sound-toggle" class="sound-btn" aria-label="Toggle HUD Audio">
+                    <i class="fa-solid fa-volume-xmark"></i> SOUND: OFF
+                </button>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px;">
+        <!-- Contact Section -->
+        <section id="contact" class="contact section" style="padding-top: 2rem; padding-bottom: 3rem;">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="subtitle">Connection</span>
+                    <h1 class="section-title">Let's Build <span class="gold-text">Greatness</span></h1>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info reveal">
+                        <p class="contact-intro">I am currently seeking opportunities to apply my skills in high-stakes environments. If you value quality and elegance, let's connect.</p>
+                        <div class="contact-links">
+                            <a href="mailto:30pandeyabhishek@gmail.com" class="contact-link"><i class="fa-solid fa-envelope gold-text"></i> 30pandeyabhishek@gmail.com</a>
+                            <a href="tel:+919335629211" class="contact-link"><i class="fa-solid fa-phone gold-text"></i> +91 9335629211</a>
+                            <span class="contact-link" style="color: var(--text-primary); cursor: default;"><i class="fa-solid fa-location-dot gold-text"></i> Mirzapur, Uttar Pradesh</span>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/abhishek-pandey-375656301" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://www.instagram.com/a.b.h.i.s.h.e.k.____" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/abhishek.pandey.631931" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="contact-form" class="contact-form glass-card reveal">
+                        <input type="hidden" name="access_key" value="79c30505-2ae7-4324-bb2d-35425e2b636e">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Name" required>
+                                <span class="error-msg" id="name-error"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email" required>
+                                <span class="error-msg" id="email-error"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="4" placeholder="Message" required></textarea>
+                            <span class="error-msg" id="message-error"></span>
+                        </div>
+                        <button type="submit" class="btn btn-gold w-100" id="submit-btn">Send Inquiry</button>
+                        <div id="form-success" class="success-msg hidden">Inquiry sent successfully.</div>
+                        <div id="form-error" class="error-msg hidden" style="margin-top: 1rem; text-align: center;">Something went wrong. Please try again.</div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cyber Terminal Console Section -->
+        <section id="terminal-section" class="terminal-section section" style="padding-top: 2rem; padding-bottom: 4rem;">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="subtitle">Interact</span>
+                    <h2 class="section-title">AP-NET&nbsp;<span class="gold-text">Terminal</span></h2>
+                </div>
+                <div class="terminal-container glass-card reveal" style="max-width: 900px; margin: 0 auto; padding: 0;">
+                    <div class="terminal-header" style="background: rgba(11, 11, 15, 0.90); padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 217, 255, 0.15); border-radius: 24px 24px 0 0;">
+                        <div class="terminal-buttons" style="display: flex; gap: 8px;">
+                            <span class="t-btn red" style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+                            <span class="t-btn yellow" style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+                            <span class="t-btn green" style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+                        </div>
+                        <div class="terminal-title" style="font-family: 'Courier New', monospace; font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">SYSOP@AP-NET:~</div>
+                    </div>
+                    <div class="terminal-body" style="background: rgba(8, 8, 12, 0.95); padding: 1.5rem; height: 320px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.5; color: #a4b3c6; border-radius: 0 0 24px 24px;">
+                        <div class="terminal-output" id="terminal-output">
+                            <p class="term-msg" style="color: var(--gold); font-weight: 600;">AP-NET INTERACTIVE HUD TERMINAL [Version 3.7.1]</p>
+                            <p class="term-msg">Type <span class="gold-text">help</span> to list available commands and interrogate the profile database.</p>
+                            <p class="term-msg" style="margin-bottom: 1rem;">&nbsp;</p>
+                        </div>
+                        <div class="terminal-input-line" style="display: flex; align-items: center; gap: 8px;">
+                            <span class="terminal-prompt" style="color: var(--gold-glow); font-weight: bold;">guest@ap-net:~$</span>
+                            <input type="text" id="terminal-input" autocomplete="off" style="flex: 1; background: transparent; border: none; outline: none; color: #f8fafc; font-family: inherit; font-size: inherit;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Abhishek Pandey. All Rights Reserved.</p>
+                <div class="footer-tag">Crafted with Luxury &amp; Code</div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- ░░ SCRIPTS ░░ -->
+    <script src="script.js"></script>
+</body>
+</html>

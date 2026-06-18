@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Abhishek Pandey</title>
+    <meta name="description" content="Explore the projects built by Abhishek Pandey, Frontend Developer & Full-Stack Enthusiast.">
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ░░ CINEMATIC PRELOADER ░░ -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="image/Logo.png" alt="Logo" class="preloader-logo">
+            <div class="preloader-bar-container">
+                <div class="preloader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░ LAYER 2 — Cyber Grid ░░ -->
+    <div class="cyber-grid" aria-hidden="true"></div>
+
+    <!-- ░░ Custom Luxury Cursor ░░ -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="scroll-progress-container">
+            <div class="scroll-progress-bar"></div>
+        </div>
+        <div class="nav-container container">
+            <a href="index.html" class="logo">
+                <img src="image/Logo.png" alt="Abhishek Pandey Logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions" style="display: flex; gap: 1rem; align-items: center;">
+                <button id="sound-toggle" class="sound-btn" aria-label="Toggle HUD Audio">
+                    <i class="fa-solid fa-volume-xmark"></i> SOUND: OFF
+                </button>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px;">
+        <!-- Projects Section -->
+        <section id="projects" class="projects section" style="padding-top: 2rem;">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="subtitle">Showcase</span>
+                    <h1 class="section-title">Engineering <span class="gold-text">Creations</span></h1>
+                </div>
+                
+                <div class="filter-container reveal">
+                    <button class="filter-btn active" data-filter="all">ALL_PROJECTS</button>
+                    <button class="filter-btn" data-filter="featured">FEATURED</button>
+                    <button class="filter-btn" data-filter="additional">ADDITIONAL</button>
+                    <button class="filter-btn" data-filter="college">COLLEGE</button>
+                    <button class="filter-btn" data-filter="experimental">EXPERIMENTAL</button>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- Featured Project 1: Learn_2_Ride -->
+                    <div class="project-card featured glass-card reveal" data-category="featured">
+                        <div class="project-info">
+                            <div class="project-header-meta">
+                                <span class="project-badge">Full-Stack Platform</span>
+                                <div class="building-badge">
+                                    <span class="dot-pulse"></span>
+                                    Flagship Project
+                                </div>
+                            </div>
+                            <h3>Learn2Ride Platform</h3>
+                            <p>Learn2Ride is an innovative web platform that reimagines driving education by connecting learners with verified trainers in a secure digital ecosystem. With features like trainer verification, booking management, and streamlined user interaction, it provides a modern solution for skill-based learning. The project reflects practical problem-solving, thoughtful UI design, and scalable web development concepts.</p>
+                            <div class="project-features-list" style="margin-bottom: 1.5rem;">
+                                <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.5rem;">Key Features:</h4>
+                                <ul style="list-style-type: square; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.92rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.3rem;">
+                                    <li>JWT Authentication</li>
+                                    <li>Role-Based Access Control</li>
+                                    <li>Trainer Verification Workflow</li>
+                                    <li>REST APIs Integration</li>
+                                    <li>Responsive Tailwind UI</li>
+                                    <li>MongoDB Database Schema</li>
+                                </ul>
+                            </div>
+                            <div class="project-tech" style="margin-bottom: 1.5rem;">
+                                <span>Next.js</span><span>Tailwind CSS</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span>
+                            </div>
+                            <div class="project-cta" style="display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap;">
+                                <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">View Project <i class="fa-solid fa-arrow-right-long"></i></a>
+                                <button class="btn-diag link-btn" id="btn-diagnostics" aria-expanded="false"><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> SYS_ANALYSIS</button>
+                            </div>
+                            <!-- Expandable Diagnostics/Case Study Panel -->
+                            <div class="diagnostics-panel" id="diagnostics-panel" aria-hidden="true">
+                                <div class="diag-header"><i class="fa-solid fa-terminal text-gold" style="color: var(--gold); margin-right: 5px;"></i> Learn2Ride Architecture Metrics</div>
+                                <div class="diag-body">
+                                    <p><strong>🚨 The Challenge:</strong> Traditional driving school systems suffer from high friction booking, zero real-time trainer verification, and offline coordination vulnerabilities.</p>
+                                    <p><strong>🛠️ Solution Decisions:</strong> Engineered a highly responsive frontend connecting verified trainers using REST API endpoints. Added reactive calendar management for seamless session coordination.</p>
+                                    <p><strong>⚡ Tech Wins:</strong> Reduced schedule matching times by 65%. Zero external SQL calls per session list render. Clean UI with fully accessible layouts.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-visual">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/WebLogo.png" alt="Learn2Ride Logo"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Project 2: AURA-Calc -->
+                    <div class="project-card glass-card reveal" data-category="featured">
+                        <div class="project-header-meta">
+                            <span class="project-badge">Advanced UI</span>
+                        </div>
+                        <h3>AURA-Calc</h3>
+                        <p>A cutting-edge calculator app with a modern UI, designed for seamless integration with various scientific and financial computations.</p>
+                        <div class="project-features-list" style="margin-bottom: 1.5rem;">
+                            <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.5rem;">Key Features:</h4>
+                            <ul style="list-style-type: square; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                                <li>Scientific Operations</li>
+                                <li>Expression Parsing</li>
+                                <li>Real-Time Graph Plotting</li>
+                                <li>Theme Customization</li>
+                                <li>Keyboard &amp; History Log</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech" style="margin-bottom: 1.5rem;">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-cta">
+                            <a href="https://abhishek250805.github.io/calculator/" target="_blank" rel="noopener noreferrer" class="link-btn">use it <i class="fa-solid fa-arrow-right-long"></i></a>
+                            <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-left: 1.5rem;">GitHub <i class="fa-brands fa-github"></i></a>
+                        </div>
+                        <div class="project-visual" style="margin-top: 1.5rem;">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/AURA-Calc.png" alt="AURA-Calc Interface"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Project 3: Personal Portfolio -->
+                    <div class="project-card glass-card reveal" data-category="featured">
+                        <div class="project-header-meta">
+                            <span class="project-badge">Professional UI</span>
+                        </div>
+                        <h3>Personal Portfolio Website</h3>
+                        <p>A high-performance, responsive presentation environment engineered to highlight technical stacks, academic milestones, and development projects.</p>
+                        <div class="project-features-list" style="margin-bottom: 1.5rem;">
+                            <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.5rem;">Key Features:</h4>
+                            <ul style="list-style-type: square; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                                <li>Mobile-First Responsive Layout</li>
+                                <li>Tactile Touch Target Sizes</li>
+                                <li>Optimized Client Performance</li>
+                                <li>GitHub Pages Auto-Deployment</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech" style="margin-bottom: 1.5rem;">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-cta">
+                            <a href="index.html" class="link-btn">Explore Site <i class="fa-solid fa-arrow-right-long"></i></a>
+                            <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-left: 1.5rem;">GitHub <i class="fa-brands fa-github"></i></a>
+                        </div>
+                        <div class="project-visual" style="margin-top: 1.5rem;">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="image/Logo.png" alt="Portfolio Watermark" style="object-fit: contain;"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Project 1: Amazon Premium UI -->
+                    <div class="project-card glass-card reveal" data-category="additional">
+                        <div class="project-header-meta">
+                            <span class="project-badge">UI Design</span>
+                        </div>
+                        <h3>Amazon Premium UI</h3>
+                        <p>Pixel-perfect recreation of the e-commerce giant's interface, optimized for luxury feel.</p>
+                        <div class="project-features-list" style="margin-bottom: 1.5rem;">
+                            <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.5rem;">Key Features:</h4>
+                            <ul style="list-style-type: square; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                                <li>Pixel-Perfect Layouts</li>
+                                <li>E-Commerce Design Patterns</li>
+                                <li>Hover Zoom Image Transitions</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech" style="margin-bottom: 1.5rem;">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-cta">
+                            <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub <i class="fa-brands fa-github"></i></a>
+                        </div>
+                        <div class="project-visual" style="margin-top: 1.5rem;">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/amazonimg.png" alt="Amazon UI"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Project 2: Weather Precision -->
+                    <div class="project-card glass-card reveal" data-category="additional">
+                        <div class="project-header-meta">
+                            <span class="project-badge">API Integration</span>
+                        </div>
+                        <h3>Weather Precision</h3>
+                        <p>Real-time data visualization using open APIs with a minimalist aesthetic.</p>
+                        <div class="project-features-list" style="margin-bottom: 1.5rem;">
+                            <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.5rem;">Key Features:</h4>
+                            <ul style="list-style-type: square; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                                <li>REST API Polling</li>
+                                <li>Forecast Condition Displays</li>
+                                <li>Clean Data Table Outputs</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech" style="margin-bottom: 1.5rem;">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-cta">
+                            <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub <i class="fa-brands fa-github"></i></a>
+                        </div>
+                        <div class="project-visual" style="margin-top: 1.5rem;">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/aqiimg.png" alt="Weather App"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- College Project 1: Kashi - The Unknown Fact -->
+                    <div class="project-card glass-card reveal" data-category="college">
+                        <div class="project-header-meta">
+                            <span class="project-badge">Landing Page</span>
+                        </div>
+                        <h3>Kashi - The Unknown Fact</h3>
+                        <p>An immersive digital exploration of Varanasi, uncovering hidden historical facts and spiritual depth through interactive storytelling.</p>
+                        <div class="project-features-list" style="margin-bottom: 1.5rem;">
+                            <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.5rem;">Key Features:</h4>
+                            <ul style="list-style-type: square; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                                <li>Interactive Storytelling UI</li>
+                                <li>FACT Database Integration</li>
+                                <li>Responsive CSS Parallax</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech" style="margin-bottom: 1.5rem;">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-cta">
+                            <a href="https://adityapaswan568.github.io/Kashi--The-Unexplored-City-/" target="_blank" rel="noopener noreferrer" class="link-btn">Explore Kashi <i class="fa-solid fa-arrow-right-long"></i></a>
+                        </div>
+                        <div class="project-visual" style="margin-top: 1.5rem;">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/Kashiimg.png" alt="Kashi Project"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experimental Project 1: Image Gallery -->
+                    <div class="project-card glass-card reveal" data-category="experimental">
+                        <div class="project-header-meta">
+                            <span class="project-badge">Experimental</span>
+                        </div>
+                        <h3>Image Gallery</h3>
+                        <p>A premium, hardware-accelerated image gallery showcasing a cinematic cyberpunk aesthetic. Built entirely with vanilla HTML, CSS, and ES6 JavaScript.</p>
+                        <div class="project-features-list" style="margin-bottom: 1.5rem;">
+                            <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.5rem;">Key Features:</h4>
+                            <ul style="list-style-type: square; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                                <li>GPU-Accelerated Scales</li>
+                                <li>Slideshow Modal Handlers</li>
+                                <li>Tactile Grid Hover Outlines</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech" style="margin-bottom: 1.5rem;">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-cta">
+                            <a href="https://abhishek250805.github.io/ImageGallery/" target="_blank" rel="noopener noreferrer" class="link-btn">Explore it <i class="fa-solid fa-arrow-right-long"></i></a>
+                        </div>
+                        <div class="project-visual" style="margin-top: 1.5rem;">
+                            <div class="visual-placeholder gold-glow">
+                                <span><img src="./image/ImgGallery.png" alt="Image Gallery Project"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Abhishek Pandey. All Rights Reserved.</p>
+                <div class="footer-tag">Crafted with Luxury &amp; Code</div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" class="scroll-top-btn" aria-label="Scroll to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- ░░ SCRIPTS ░░ -->
+    <script src="script.js"></script>
+</body>
+</html>
