@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abhishek Pandey | Mobile Portfolio</title>
+    <meta name="description" content="Mobile app experience of Abhishek Pandey, Frontend Developer & Full-Stack Enthusiast. Built with luxury dark gold aesthetic.">
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Mobile CSS -->
+    <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="m-preloader">
+        <div class="preloader-content">
+            <img src="image/Logo.png" alt="Logo" class="preloader-logo">
+            <div class="preloader-bar-container">
+                <div class="preloader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cyber Grid Backdrop -->
+    <div class="cyber-grid" aria-hidden="true"></div>
+
+    <!-- Watermark Logo -->
+    <div class="logo-watermark" aria-hidden="true">
+        <img src="image/Logo.png" alt="">
+    </div>
+
+    <!-- Sticky Floating Action Button (FAB) -->
+    <button class="fab" id="contact-fab" aria-label="Contact Me">
+        <i class="fa-solid fa-comments"></i>
+    </button>
+
+    <!-- Main Viewport Container -->
+    <main class="app-viewport">
+        
+        <!-- ================= HOME TAB ================= -->
+        <section id="tab-home" class="tab-section active">
+            <!-- Hero Card -->
+            <div class="hero-card glass-card">
+                <div class="profile-area">
+                    <div class="profile-pic-container">
+                        <img src="image/IMG-20260310-WA0006.jpg.jpeg" alt="Abhishek Pandey" class="profile-pic">
+                    </div>
+                    <div class="status-badge">
+                        <span class="pulse-dot"></span>
+                        Available for Internships
+                    </div>
+                </div>
+                
+                <h1 class="name">Abhishek <span class="gold-text">Pandey</span></h1>
+                <p class="title-sub">Frontend Developer &amp; Full-Stack Enthusiast</p>
+                <p class="tagline">Building responsive web apps using React, Next.js, JavaScript, Node.js</p>
+                
+                <button class="btn btn-gold w-100" id="hero-cta-btn">
+                    Let's Build Something Great
+                </button>
+            </div>
+
+            <!-- Stats Swipe Carousel -->
+            <div class="section-title-wrap">
+                <span class="subtitle">Overview</span>
+                <h2 class="section-title">Key <span class="gold-text">Stats</span></h2>
+            </div>
+            
+            <div class="stats-carousel-container">
+                <div class="stats-carousel snap-scroll-x">
+                    <!-- Stat Card 1 -->
+                    <div class="stat-card glass-card scroll-snap-item">
+                        <div class="stat-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+                        <span class="stat-value">6+</span>
+                        <span class="stat-label">Projects Built</span>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="stat-card glass-card scroll-snap-item">
+                        <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <span class="stat-value">BCA</span>
+                        <span class="stat-label">Graduation 2023–26</span>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="stat-card glass-card scroll-snap-item">
+                        <div class="stat-icon"><i class="fa-solid fa-code"></i></div>
+                        <span class="stat-value">10+</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                    <!-- Stat Card 4 -->
+                    <div class="stat-card glass-card scroll-snap-item">
+                        <div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <span class="stat-value">MERN</span>
+                        <span class="stat-label">React / Next.js</span>
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="section-title-wrap">
+                <span class="subtitle">Profile</span>
+                <h2 class="section-title">About <span class="gold-text">Me</span></h2>
+            </div>
+            
+            <div class="about-card glass-card">
+                <p>Frontend dev passionate about mobile-first, scalable UI, clean architecture.</p>
+                <p class="about-secondary">I combine creative interface development with structured logic to deliver native-feeling, high-performance interactions that enhance the end-user journey.</p>
+            </div>
+
+            <!-- Tech Stack Section -->
+            <div class="section-title-wrap">
+                <span class="subtitle">Expertise</span>
+                <h2 class="section-title">Technical <span class="gold-text">Skills</span></h2>
+            </div>
+            
+            <div class="tech-stack-container glass-card">
+                <!-- Frontend Chips -->
+                <div class="tech-category">
+                    <h3>Frontend</h3>
+                    <div class="chips-grid">
+                        <span class="chip-pill">HTML5</span>
+                        <span class="chip-pill">CSS3</span>
+                        <span class="chip-pill">JavaScript</span>
+                        <span class="chip-pill">React</span>
+                        <span class="chip-pill">Next.js</span>
+                        <span class="chip-pill">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <!-- Collapsible content -->
+                <div class="tech-collapsible" id="tech-more-content">
+                    <!-- Backend -->
+                    <div class="tech-category">
+                        <h3>Backend &amp; Database</h3>
+                        <div class="chips-grid">
+                            <span class="chip-pill">Node.js</span>
+                            <span class="chip-pill">Express.js</span>
+                            <span class="chip-pill">Python (Flask)</span>
+                            <span class="chip-pill">SQL</span>
+                            <span class="chip-pill">MongoDB</span>
+                            <span class="chip-pill">Firebase</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Languages -->
+                    <div class="tech-category">
+                        <h3>Programming Languages</h3>
+                        <div class="chips-grid">
+                            <span class="chip-pill">C++</span>
+                            <span class="chip-pill">Java</span>
+                            <span class="chip-pill">Python</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="tech-category">
+                        <h3>Tools &amp; Integrations</h3>
+                        <div class="chips-grid">
+                            <span class="chip-pill">Git</span>
+                            <span class="chip-pill">GitHub</span>
+                            <span class="chip-pill">Gemini Pro API</span>
+                            <span class="chip-pill">VS Code</span>
+                            <span class="chip-pill">Cursor</span>
+                            <span class="chip-pill">Kaggle</span>
+                            <span class="chip-pill">Antigravity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline btn-sm w-100" id="tech-toggle-btn" style="margin-top: 1rem;">
+                    Show More <i class="fa-solid fa-chevron-down" style="margin-left: 6px;"></i>
+                </button>
+            </div>
+
+            <!-- Page Footer Switcher -->
+            <footer class="view-footer">
+                <p>&copy; 2026 Abhishek Pandey</p>
+                <button class="desktop-switch-link" id="switch-desktop-btn-home">View Desktop Site</button>
+            </footer>
+        </section>
+
+        <!-- ================= PROJECTS TAB ================= -->
+        <section id="tab-projects" class="tab-section">
+            <div class="section-title-wrap">
+                <span class="subtitle">Showcase</span>
+                <h2 class="section-title">Projects <span class="gold-text">Deck</span></h2>
+            </div>
+            
+            <p class="swipe-hint"><i class="fa-solid fa-hand-pointer animate-swipe"></i> Swipe cards or tap to expand metrics</p>
+
+            <div class="projects-deck-wrapper">
+                <div class="projects-deck snap-scroll-x">
+                    <!-- Project Card 1: Learn2Ride -->
+                    <div class="project-card glass-card scroll-snap-item" data-project="learn2ride">
+                        <div class="project-media">
+                            <img src="./image/WebLogo.png" alt="Learn2Ride Logo" class="project-logo">
+                        </div>
+                        <div class="project-body">
+                            <span class="project-tag">Full-Stack Platform</span>
+                            <h3>Learn2Ride Platform</h3>
+                            <p class="short-desc">Driving education platform connecting learners with verified trainers in a secure, digital booking ecosystem.</p>
+                            <div class="project-chips">
+                                <span>Next.js</span>
+                                <span>Tailwind CSS</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                            </div>
+                            <button class="btn btn-gold btn-sm expand-project-btn">
+                                Open Details <i class="fa-solid fa-chart-line" style="margin-left: 6px;"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2: AURA-Calc -->
+                    <div class="project-card glass-card scroll-snap-item" data-project="auracalc">
+                        <div class="project-media">
+                            <img src="./image/AURA-Calc.png" alt="AURA-Calc" class="project-logo">
+                        </div>
+                        <div class="project-body">
+                            <span class="project-tag">Advanced UI</span>
+                            <h3>AURA-Calc</h3>
+                            <p class="short-desc">A cutting-edge calculator app with a modern glassmorphic interface, designed for scientific and financial computations.</p>
+                            <div class="project-chips">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="project-card-ctas">
+                                <a href="https://abhishek250805.github.io/calculator/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-xs"><i class="fa-solid fa-play"></i> Live</a>
+                                <button class="btn btn-gold btn-xs expand-project-btn"><i class="fa-solid fa-circle-info"></i> Info</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3: Portfolio Site -->
+                    <div class="project-card glass-card scroll-snap-item" data-project="portfolio">
+                        <div class="project-media">
+                            <img src="image/Logo.png" alt="Portfolio" class="project-logo contain">
+                        </div>
+                        <div class="project-body">
+                            <span class="project-tag">Professional UI</span>
+                            <h3>Personal Portfolio</h3>
+                            <p class="short-desc">A high-performance presentation environment engineered with hardware-accelerated animations and an app-like mobile UI.</p>
+                            <div class="project-chips">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="project-card-ctas">
+                                <button class="btn btn-desktop-view btn-outline btn-xs"><i class="fa-solid fa-desktop"></i> Desktop View</button>
+                                <button class="btn btn-gold btn-xs expand-project-btn"><i class="fa-solid fa-circle-info"></i> Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Footer Switcher -->
+            <footer class="view-footer">
+                <p>&copy; 2026 Abhishek Pandey</p>
+                <button class="desktop-switch-link" id="switch-desktop-btn-projects">View Desktop Site</button>
+            </footer>
+        </section>
+
+        <!-- ================= RESUME TAB ================= -->
+        <section id="tab-resume" class="tab-section">
+            <div class="section-title-wrap">
+                <span class="subtitle">Experience</span>
+                <h2 class="section-title">Resume &amp; <span class="gold-text">Certs</span></h2>
+            </div>
+
+            <!-- Download Button -->
+            <div class="resume-download-box glass-card">
+                <div class="download-text-group">
+                    <h3>Curriculum Vitae</h3>
+                    <p>Get a comprehensive copy of my background</p>
+                </div>
+                <a href="ResumeAP.pdf" download class="btn btn-gold download-cv-btn">
+                    <i class="fa-solid fa-download"></i> PDF
+                </a>
+            </div>
+
+            <!-- Accordion -->
+            <div class="accordion-container">
+                <!-- Accordion Item 1 -->
+                <div class="accordion-item glass-card">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fa-solid fa-graduation-cap gold-text"></i> Education (BCA)</span>
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <h4 class="degree-title">Bachelor of Computer Applications</h4>
+                            <p class="institution">School of Management Sciences</p>
+                            <div class="meta-row">
+                                <span><i class="fa-solid fa-calendar"></i> 2023 – 2026</span>
+                                <span><i class="fa-solid fa-location-dot"></i> Varanasi, UP</span>
+                            </div>
+                            <div class="gpa-badge">CGPA: 7.61 / 10.0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="accordion-item glass-card">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fa-brands fa-python gold-text"></i> Python Programming</span>
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <h4 class="cert-title">Python Programming</h4>
+                            <p class="provider">by Aradhya Technologies</p>
+                            <p class="cert-desc">Core language proficiency, OOP concepts, automation scripts, and logical flow structures.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="accordion-item glass-card">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fa-solid fa-database gold-text"></i> Data Structures</span>
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <h4 class="cert-title">Data Structures</h4>
+                            <p class="provider">by Aradhya Technologies</p>
+                            <p class="cert-desc">Proficiency in implementing efficient coding logic, algorithms, lists, stacks, queues, and tree traversal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 -->
+                <div class="accordion-item glass-card">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fa-solid fa-code gold-text"></i> Web Development</span>
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <h4 class="cert-title">Web Development</h4>
+                            <p class="provider">by Minicimex</p>
+                            <p class="cert-desc">Interactive web development with HTML, CSS, JavaScript core features, and React library integration.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 5 -->
+                <div class="accordion-item glass-card">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span><i class="fa-solid fa-chart-pie gold-text"></i> Data Analysis</span>
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <h4 class="cert-title">Data Analysis</h4>
+                            <p class="provider">by Minicimex</p>
+                            <p class="cert-desc">Data compilation, cleaning, mathematical analysis, and visual charting using Python modules.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page Footer Switcher -->
+            <footer class="view-footer">
+                <p>&copy; 2026 Abhishek Pandey</p>
+                <button class="desktop-switch-link" id="switch-desktop-btn-resume">View Desktop Site</button>
+            </footer>
+        </section>
+
+        <!-- ================= CONTACT TAB ================= -->
+        <section id="tab-contact" class="tab-section">
+            <div class="section-title-wrap">
+                <span class="subtitle">Connection</span>
+                <h2 class="section-title">Let's Build <span class="gold-text">Greatness</span></h2>
+            </div>
+
+            <!-- Contact info quick links -->
+            <div class="contact-info-cards">
+                <a href="mailto:30pandeyabhishek@gmail.com" class="info-pill glass-card">
+                    <i class="fa-solid fa-envelope gold-text"></i>
+                    <div class="info-pill-text">
+                        <span class="pill-label">Email</span>
+                        <span class="pill-val">30pandeyabhishek@gmail.com</span>
+                    </div>
+                </a>
+                
+                <a href="tel:+919335629211" class="info-pill glass-card">
+                    <i class="fa-solid fa-phone gold-text"></i>
+                    <div class="info-pill-text">
+                        <span class="pill-label">Call</span>
+                        <span class="pill-val">+91 9335629211</span>
+                    </div>
+                </a>
+                
+                <div class="info-pill glass-card">
+                    <i class="fa-solid fa-location-dot gold-text"></i>
+                    <div class="info-pill-text">
+                        <span class="pill-label">Location</span>
+                        <span class="pill-val">Varanasi, UP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media row -->
+            <div class="social-row">
+                <a href="https://www.linkedin.com/in/abhishek-pandey-375656301" target="_blank" rel="noopener noreferrer" class="social-item glass-card" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="social-item glass-card" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/a.b.h.i.s.h.e.k.____" target="_blank" rel="noopener noreferrer" class="social-item glass-card" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/abhishek.pandey.631931" target="_blank" rel="noopener noreferrer" class="social-item glass-card" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </div>
+
+            <!-- Form Card -->
+            <div class="contact-form-card glass-card">
+                <form id="m-contact-form">
+                    <input type="hidden" name="access_key" value="79c30505-2ae7-4324-bb2d-35425e2b636e">
+                    
+                    <div class="form-group">
+                        <input type="text" id="m-name" name="name" placeholder="Name" required autocomplete="name">
+                        <span class="error-msg" id="m-name-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="m-email" name="email" placeholder="Email" required autocomplete="email">
+                        <span class="error-msg" id="m-email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea id="m-message" name="message" rows="4" placeholder="How can I help you?" required></textarea>
+                        <span class="error-msg" id="m-message-error"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-gold w-100" id="m-submit-btn">Send Inquiry</button>
+                    <div id="m-form-success" class="success-msg hidden">Inquiry sent successfully!</div>
+                    <div id="m-form-error" class="error-msg hidden" style="margin-top: 1rem; text-align: center;"></div>
+                </form>
+            </div>
+
+            <!-- Page Footer Switcher -->
+            <footer class="view-footer">
+                <p>&copy; 2026 Abhishek Pandey</p>
+                <button class="desktop-switch-link" id="switch-desktop-btn-contact">View Desktop Site</button>
+            </footer>
+        </section>
+        
+    </main>
+
+    <!-- Bottom Sheet Modal Structure for Project Details -->
+    <div class="bottom-sheet-backdrop" id="project-sheet-backdrop" aria-hidden="true">
+        <div class="bottom-sheet" id="project-sheet">
+            <div class="sheet-header">
+                <div class="grab-handle"></div>
+                <button class="close-sheet-btn" aria-label="Close details">&times;</button>
+            </div>
+            <div class="sheet-content">
+                <div class="sheet-project-meta">
+                    <span class="project-tag" id="sheet-project-tag">Platform</span>
+                    <h2 class="sheet-title" id="sheet-project-title">Project Title</h2>
+                    <div class="sheet-tech-list" id="sheet-project-tech">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-block">
+                        <h3><i class="fa-solid fa-circle-exclamation gold-text"></i> The Challenge</h3>
+                        <p id="sheet-project-challenge">Details of the challenge...</p>
+                    </div>
+                    <div class="metric-block">
+                        <h3><i class="fa-solid fa-screwdriver-wrench gold-text"></i> Solution Decisions</h3>
+                        <p id="sheet-project-solution">Details of the solution...</p>
+                    </div>
+                    <div class="metric-block text-wins">
+                        <h3><i class="fa-solid fa-bolt gold-text"></i> Tech Wins</h3>
+                        <p id="sheet-project-wins">Details of technical wins...</p>
+                    </div>
+                </div>
+
+                <div class="sheet-actions" id="sheet-project-actions">
+                    <!-- Dynamic CTA links -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Bottom Tab Navigation Bar -->
+    <nav class="bottom-nav">
+        <button class="nav-tab active" data-target="home">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </button>
+        <button class="nav-tab" data-target="projects">
+            <i class="fa-solid fa-code-fork"></i>
+            <span>Projects</span>
+        </button>
+        <button class="nav-tab" data-target="resume">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Resume</span>
+        </button>
+        <button class="nav-tab" data-target="contact">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Contact</span>
+        </button>
+    </nav>
+
+    <!-- Mobile UI script -->
+    <script src="mobile.js"></script>
+</body>
+</html>

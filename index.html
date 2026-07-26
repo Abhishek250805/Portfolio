@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        if (window.innerWidth < 768 && localStorage.getItem('prefer-desktop') !== 'true') {
+            window.location.href = 'mobile.html' + window.location.hash;
+        }
+    </script>
     <title>Abhishek Pandey | Portfolio</title>
     <meta name="description" content="Premium portfolio of Abhishek Pandey, a Frontend Developer and Full-Stack Enthusiast specializing in modern web experiences.">
     

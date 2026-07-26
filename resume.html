@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume & Odyssey | Abhishek Pandey</title>
+    <script>
+        if (window.innerWidth < 768 && localStorage.getItem('prefer-desktop') !== 'true') {
+            window.location.href = 'mobile.html#resume';
+        }
+    </script>
+    <title>Resume &amp; Odyssey | Abhishek Pandey</title>
     <meta name="description" content="Professional qualifications, education, certifications, technical skills, and learning odyssey of Abhishek Pandey.">
     
     <!-- Google Fonts: Outfit -->

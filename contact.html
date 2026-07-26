@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact & Terminal | Abhishek Pandey</title>
+    <script>
+        if (window.innerWidth < 768 && localStorage.getItem('prefer-desktop') !== 'true') {
+            window.location.href = 'mobile.html#contact';
+        }
+    </script>
+    <title>Contact &amp; Terminal | Abhishek Pandey</title>
     <meta name="description" content="Get in touch with Abhishek Pandey. Contact form, location information, and interactive profile database terminal.">
     
     <!-- Google Fonts: Outfit -->
