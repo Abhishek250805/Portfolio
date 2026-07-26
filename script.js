@@ -508,7 +508,7 @@ const initPortfolio = () => {
                         appendTermLine('Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Abhishek Pandey');
                         appendTermLine('Role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Frontend Developer &amp; Full-Stack Enthusiast');
                         appendTermLine('Education&nbsp;&nbsp;: Bachelor of Computer Applications (2023–2026)');
-                        appendTermLine('CGPA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 7.5 / 10.0');
+                        appendTermLine('CGPA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 7.61 / 10.0');
                         appendTermLine('Location&nbsp;&nbsp;&nbsp;: Mirzapur, Uttar Pradesh');
                         appendTermLine('Bio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Passionate BCA student building modern, responsive web apps using React, Next.js, Node.js, and MongoDB.');
                         break;
