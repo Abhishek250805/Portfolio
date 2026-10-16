@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        if (window.innerWidth < 768 && localStorage.getItem('prefer-desktop') !== 'true') {
-            window.location.href = 'mobile.html#contact';
-        }
-    </script>
-    <title>Contact &amp; Terminal | Abhishek Pandey</title>
-    <meta name="description" content="Get in touch with Abhishek Pandey. Contact form, location information, and interactive profile database terminal.">
+    <title>Contact | Abhishek Pandey - Full-Stack Developer</title>
+    <meta name="description" content="Portfolio of Abhishek Pandey, MCA student and MERN stack developer. Projects built with React, Next.js, Node.js and MongoDB.">
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" type="image/png" href="image/Logo.png">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contact | Abhishek Pandey - Full-Stack Developer">
+    <meta property="og:description" content="Portfolio of Abhishek Pandey, MCA student and MERN stack developer. Projects built with React, Next.js, Node.js and MongoDB.">
+    <meta property="og:image" content="image/abhishek-pandey.jpg">
+    <meta property="og:url" content="https://abhishek250805.github.io/Portfolio/contact.html">
+    <meta property="og:type" content="website">
     
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +30,7 @@
     <!-- ░░ CINEMATIC PRELOADER ░░ -->
     <div id="preloader">
         <div class="preloader-content">
-            <img src="image/Logo.png" alt="Logo" class="preloader-logo">
+            <img src="image/Logo.png" alt="Abhishek Pandey Portfolio" class="preloader-logo" width="80" height="80">
             <div class="preloader-bar-container">
                 <div class="preloader-bar"></div>
             </div>
@@ -36,7 +40,7 @@
     <!-- ░░ LAYER 2 — Cyber Grid ░░ -->
     <div class="cyber-grid" aria-hidden="true"></div>
 
-    <!-- ░░ Custom Luxury Cursor ░░ -->
+    <!-- ░░ Custom Cursor ░░ -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
@@ -46,8 +50,8 @@
             <div class="scroll-progress-bar"></div>
         </div>
         <div class="nav-container container">
-            <a href="index.html" class="logo">
-                <img src="image/Logo.png" alt="Abhishek Pandey Logo">
+            <a href="index.html" class="logo" aria-label="Abhishek Pandey Portfolio Home">
+                <img src="image/Logo.png" alt="Abhishek Pandey Portfolio" width="60" height="60">
             </a>
             <nav>
                 <ul class="nav-links">
@@ -58,10 +62,10 @@
                 </ul>
             </nav>
             <div class="nav-actions" style="display: flex; gap: 1rem; align-items: center;">
-                <button id="sound-toggle" class="sound-btn" aria-label="Toggle HUD Audio">
+                <button id="sound-toggle" class="sound-btn" aria-label="Toggle HUD sound effects (Currently disabled)" title="Toggle interactive HUD sound effects">
                     <i class="fa-solid fa-volume-xmark"></i> SOUND: OFF
                 </button>
-                <button class="menu-toggle" aria-label="Toggle Menu">
+                <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </button>
@@ -75,20 +79,20 @@
             <div class="container">
                 <div class="section-header reveal">
                     <span class="subtitle">Connection</span>
-                    <h1 class="section-title">Let's Build <span class="gold-text">Greatness</span></h1>
+                    <h1 class="section-title">Let's Build <span class="gold-text">Together</span></h1>
                 </div>
                 <div class="contact-grid">
                     <div class="contact-info reveal">
-                        <p class="contact-intro">I am currently seeking opportunities to apply my skills in high-stakes environments. If you value quality and elegance, let's connect.</p>
+                        <p class="contact-intro">I am an MCA student and full-stack developer open to internship opportunities, freelance projects, and collaborations. Let's connect.</p>
                         <div class="contact-links">
-                            <a href="mailto:30pandeyabhishek@gmail.com" class="contact-link"><i class="fa-solid fa-envelope gold-text"></i> 30pandeyabhishek@gmail.com</a>
-                            <a href="tel:+919335629211" class="contact-link"><i class="fa-solid fa-phone gold-text"></i> +91 9335629211</a>
+                            <a href="mailto:30pandeyabhishek@gmail.com" class="contact-link" aria-label="Send email to 30pandeyabhishek@gmail.com"><i class="fa-solid fa-envelope gold-text"></i> 30pandeyabhishek@gmail.com</a>
+                            <a href="tel:+919335629211" class="contact-link" aria-label="Call +91 9335629211"><i class="fa-solid fa-phone gold-text"></i> +91 9335629211</a>
                             <span class="contact-link" style="color: var(--text-primary); cursor: default;"><i class="fa-solid fa-location-dot gold-text"></i> Mirzapur, Uttar Pradesh</span>
-                            <div class="social-links">
-                                <a href="https://www.linkedin.com/in/abhishek-pandey-375656301" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                                <a href="https://www.instagram.com/a.b.h.i.s.h.e.k.____" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                                <a href="https://www.facebook.com/abhishek.pandey.631931" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <div class="social-links" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                                <a href="https://www.linkedin.com/in/abhishek-pandey-375656301" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><i class="fa-brands fa-github"></i></a>
+                                <a href="mailto:30pandeyabhishek@gmail.com" aria-label="Email Abhishek Pandey"><i class="fa-solid fa-envelope"></i></a>
+                                <a href="https://www.instagram.com/a.b.h.i.s.h.e.k.____" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile"><i class="fa-brands fa-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -108,8 +112,8 @@
                             <textarea id="message" name="message" rows="4" placeholder="Message" required></textarea>
                             <span class="error-msg" id="message-error"></span>
                         </div>
-                        <button type="submit" class="btn btn-gold w-100" id="submit-btn">Send Inquiry</button>
-                        <div id="form-success" class="success-msg hidden">Inquiry sent successfully.</div>
+                        <button type="submit" class="btn btn-gold w-100" id="submit-btn">Send Message</button>
+                        <div id="form-success" class="success-msg hidden">Message sent successfully.</div>
                         <div id="form-error" class="error-msg hidden" style="margin-top: 1rem; text-align: center;">Something went wrong. Please try again.</div>
                     </form>
                 </div>
@@ -152,7 +156,12 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2026 Abhishek Pandey. All Rights Reserved.</p>
-                <div class="footer-tag">Crafted with Luxury &amp; Code</div>
+                <div class="footer-social-links" style="display: flex; gap: 1.2rem; align-items: center; justify-content: center; margin: 0.5rem 0;">
+                    <a href="https://www.linkedin.com/in/abhishek-pandey-375656301" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="footer-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="footer-social-link"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:30pandeyabhishek@gmail.com" aria-label="Email Abhishek Pandey" class="footer-social-link"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <div class="footer-tag">Built with HTML, CSS &amp; JavaScript</div>
             </div>
         </div>
     </footer>

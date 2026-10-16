@@ -33,7 +33,7 @@ const initPortfolio = () => {
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 
-    // ── 2. Custom Luxury Cursor ───────────────────────────────
+    // ── 2. Custom Cursor ─────────────────────────────────────
     const dot      = document.querySelector('.cursor-dot');
     const outline  = document.querySelector('.cursor-outline');
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -177,6 +177,7 @@ const initPortfolio = () => {
             e.stopPropagation();
             const active = menuToggle.classList.toggle('active');
             navLinks.classList.toggle('active', active);
+            menuToggle.setAttribute('aria-expanded', active ? 'true' : 'false');
             document.body.style.overflow = active ? 'hidden' : '';
         });
 
@@ -185,6 +186,7 @@ const initPortfolio = () => {
             if (navLinks.classList.contains('active') && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
                 menuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
@@ -194,6 +196,7 @@ const initPortfolio = () => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
@@ -211,6 +214,7 @@ const initPortfolio = () => {
                 if (navLinks && window.innerWidth <= 768) {
                     navLinks.classList.remove('active');
                     menuToggle.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
                 }
             }
         });
@@ -387,10 +391,14 @@ const initPortfolio = () => {
             if (soundEnabled) {
                 soundToggle.classList.add('active');
                 soundToggle.innerHTML = '<i class="fa-solid fa-volume-high"></i> SOUND: ON';
+                soundToggle.setAttribute('aria-label', 'Toggle HUD sound effects (Currently enabled)');
+                soundToggle.setAttribute('title', 'Toggle HUD sound effects (Currently enabled)');
                 setTimeout(() => playSound('click'), 100);
             } else {
                 soundToggle.classList.remove('active');
                 soundToggle.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> SOUND: OFF';
+                soundToggle.setAttribute('aria-label', 'Toggle HUD sound effects (Currently disabled)');
+                soundToggle.setAttribute('title', 'Toggle HUD sound effects (Currently disabled)');
             }
         });
     }
@@ -506,25 +514,26 @@ const initPortfolio = () => {
                     case 'bio':
                         appendTermLine('--- SYSTEM BIOGRAPHY REGISTER ---', false, 'var(--gold)');
                         appendTermLine('Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Abhishek Pandey');
-                        appendTermLine('Role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Frontend Developer &amp; Full-Stack Enthusiast');
-                        appendTermLine('Education&nbsp;&nbsp;: Bachelor of Computer Applications (2023–2026)');
-                        appendTermLine('CGPA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 7.61 / 10.0');
-                        appendTermLine('Location&nbsp;&nbsp;&nbsp;: Mirzapur, Uttar Pradesh');
-                        appendTermLine('Bio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Passionate BCA student building modern, responsive web apps using React, Next.js, Node.js, and MongoDB.');
+                        appendTermLine('Role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: MCA Student | Full-Stack Developer (MERN)');
+                        appendTermLine('Education&nbsp;&nbsp;: Master of Computer Applications (2026–2028)');
+                        appendTermLine('University&nbsp;: Swami Vivekanand Subharti University, Meerut');
+                        appendTermLine('Prior Deg.&nbsp;: BCA (2023–2026, CGPA 7.61/10.0, SMS Varanasi)');
+                        appendTermLine('Location&nbsp;&nbsp;&nbsp;: Mirzapur / Meerut, Uttar Pradesh');
+                        appendTermLine('Bio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: MCA student and full-stack developer building scalable web applications with modern frontend and backend technologies.');
                         break;
                     case 'skills':
                         appendTermLine('--- STACK DIAGNOSTIC REPORT ---', false, 'var(--gold)');
-                        appendTermLine('<span style="color:#FFD700;">[FRONTEND]</span>: HTML5 | CSS3 | JavaScript | React.js | Next.js');
-                        appendTermLine('<span style="color:#FF8C00;">[BACKEND]</span> : Node.js | Express.js | REST APIs');
-                        appendTermLine('<span style="color:#a4b3c6;">[DATABASE]</span>: MongoDB');
-                        appendTermLine('<span style="color:#00D9FF;">[LANGUAGES]</span>: C | C++ | Java | Python');
-                        appendTermLine('<span style="color:#4ade80;">[TOOLS]</span>&nbsp;&nbsp;&nbsp;&nbsp;: Git | GitHub | VS Code');
+                        appendTermLine('<span style="color:#FFD700;">[FRONTEND]</span>: HTML5 | CSS3 | JavaScript | React.js | Next.js | Tailwind CSS');
+                        appendTermLine('<span style="color:#FF8C00;">[BACKEND]</span> : Node.js | Express.js | Python/Flask | REST APIs');
+                        appendTermLine('<span style="color:#a4b3c6;">[DATABASE]</span>: MongoDB | SQL | Firebase');
+                        appendTermLine('<span style="color:#00D9FF;">[LANGUAGES]</span>: C | C++ | Java | Python | JavaScript');
+                        appendTermLine('<span style="color:#4ade80;">[TOOLS]</span>&nbsp;&nbsp;&nbsp;&nbsp;: Git | GitHub | VS Code | Postman | Gemini API');
                         break;
                     case 'projects':
                         appendTermLine('--- RETRIEVING FLAGSHIP ARCHIVES ---', false, 'var(--gold)');
-                        appendTermLine('1. <span class="gold-text">Learn_2_Ride</span> (Full-stack driving learning platform | Next.js, Express, MongoDB)');
-                        appendTermLine('2. <span class="gold-text">AuraCalc</span> (Advanced scientific calculator with graph plotting | HTML, CSS, JS)');
-                        appendTermLine('3. <span class="gold-text">Portfolio</span> (Modern developer responsive showcase environment | HTML, CSS, JS)');
+                        appendTermLine('1. <span class="gold-text">Learn2Ride</span> (Full-stack driving learning platform [In Progress] | Next.js, Express, MongoDB)');
+                        appendTermLine('2. <span class="gold-text">AURA-Calc</span> (Advanced scientific calculator with graph plotting | HTML, CSS, JS)');
+                        appendTermLine('3. <span class="gold-text">Portfolio v2</span> (Modern developer responsive showcase environment | HTML, CSS, JS)');
                         break;
                     case 'sound':
                         if (soundToggle) soundToggle.click();

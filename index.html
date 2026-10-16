@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        if (window.innerWidth < 768 && localStorage.getItem('prefer-desktop') !== 'true') {
-            window.location.href = 'mobile.html' + window.location.hash;
-        }
-    </script>
-    <title>Abhishek Pandey | Portfolio</title>
-    <meta name="description" content="Premium portfolio of Abhishek Pandey, a Frontend Developer and Full-Stack Enthusiast specializing in modern web experiences.">
+    <title>Abhishek Pandey | MCA Student &amp; Full-Stack Developer (MERN)</title>
+    <meta name="description" content="Portfolio of Abhishek Pandey, MCA student and MERN stack developer. Projects built with React, Next.js, Node.js and MongoDB.">
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" type="image/png" href="image/Logo.png">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Abhishek Pandey | MCA Student &amp; Full-Stack Developer (MERN)">
+    <meta property="og:description" content="Portfolio of Abhishek Pandey, MCA student and MERN stack developer. Projects built with React, Next.js, Node.js and MongoDB.">
+    <meta property="og:image" content="image/abhishek-pandey.jpg">
+    <meta property="og:url" content="https://abhishek250805.github.io/Portfolio/">
+    <meta property="og:type" content="website">
     
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +45,7 @@
         <img src="image/Logo.png" alt="">
     </div>
 
-    <!-- ░░ Custom Luxury Cursor ░░ -->
+    <!-- ░░ Custom Cursor ░░ -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
@@ -51,8 +55,8 @@
             <div class="scroll-progress-bar"></div>
         </div>
         <div class="nav-container container">
-            <a href="index.html" class="logo">
-                <img src="image/Logo.png" alt="Abhishek Pandey Logo">
+            <a href="index.html" class="logo" aria-label="Abhishek Pandey Portfolio Home">
+                <img src="image/Logo.png" alt="Abhishek Pandey Portfolio" width="60" height="60">
             </a>
             <nav>
                 <ul class="nav-links">
@@ -63,10 +67,10 @@
                 </ul>
             </nav>
             <div class="nav-actions" style="display: flex; gap: 1rem; align-items: center;">
-                <button id="sound-toggle" class="sound-btn" aria-label="Toggle HUD Audio">
+                <button id="sound-toggle" class="sound-btn" aria-label="Toggle HUD sound effects (Currently disabled)" title="Toggle interactive HUD sound effects">
                     <i class="fa-solid fa-volume-xmark"></i> SOUND: OFF
                 </button>
-                <button class="menu-toggle" aria-label="Toggle Menu">
+                <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </button>
@@ -80,37 +84,37 @@
             <div class="container hero-content hero-split">
                 <div class="hero-left reveal">
                     <div class="profile-pic-container">
-                        <img src="image/IMG-20260310-WA0006.jpg.jpeg" alt="Abhishek Pandey" class="profile-pic">
+                        <img src="image/abhishek-pandey.jpg" alt="Abhishek Pandey - MCA Student &amp; Full-Stack Developer" class="profile-pic" width="320" height="320">
                     </div>
                 </div>
                 <div class="hero-right reveal">
                     <div class="status-badge-container">
-                        <div class="badge-premium">Available for Internships</div>
+                        <div class="badge-status">MCA Student · Open to Internships</div>
                         <div class="pulse-indicator">
                             <span class="dot"></span>
                             <span class="ping"></span>
                         </div>
                     </div>
                     <h1 class="name">Abhishek <span class="gold-text">Pandey</span></h1>
-                    <h2 class="title">Frontend Developer &amp; Full-Stack Enthusiast</h2>
+                    <h2 class="title">MCA Student | Full-Stack Developer (MERN)</h2>
                     <p class="tagline">Building responsive web applications using React, Next.js, JavaScript, Node.js, and modern web technologies.</p>
                     
                     <div class="hero-stats-grid">
                         <div class="hero-stat-card glass-card">
-                            <span class="stat-value">6+</span>
+                            <span class="stat-value">7</span>
                             <span class="stat-label">Projects Built</span>
                         </div>
                         <div class="hero-stat-card glass-card">
-                            <span class="stat-value">Graduation</span>
-                            <span class="stat-label">BCA 2023-26</span>
+                            <span class="stat-value">MCA</span>
+                            <span class="stat-label">2026-28</span>
                         </div>
                         <div class="hero-stat-card glass-card">
-                            <span class="stat-value">10+</span>
+                            <span class="stat-value">18+</span>
                             <span class="stat-label">Technologies</span>
                         </div>
                         <div class="hero-stat-card glass-card">
-                            <span class="stat-value">Mern Stack</span>
-                            <span class="stat-label">React-NextJS</span>
+                            <span class="stat-value">MERN Stack</span>
+                            <span class="stat-label">Developer</span>
                         </div>
                     </div>
 
@@ -186,13 +190,23 @@
                 
                 <div class="about-grid" style="margin-bottom: 2rem;">
                     <div class="about-text glass-card reveal">
-                        <p>I am a Frontend Developer and Full-Stack Enthusiast passionate about building responsive web applications. I specialize in crafting premium digital experiences using React, Next.js, JavaScript, and Node.js.</p>
-                        <p>Combining clean UI architecture with robust problem solving, I design mobile-first layouts that scale beautifully across all viewports. Driven by continuous learning, I am dedicated to writing modular, performant code that solves real-world challenges.</p>
-                        <div class="signature">Abhishek Pandey</div>
+                        <p>I'm Abhishek, an MCA student at Swami Vivekanand Subharti University, Meerut, and a full-stack developer working with the MERN stack. I build responsive web apps and enjoy turning real-world problems into clean, usable products. I'm currently deepening my skills in <!-- TODO: specify topic -->[TOPIC] and looking for internships where I can learn and contribute.</p>
+                        
+                        <!-- Currently Learning / Building Section -->
+                        <div class="currently-building" style="margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                            <h4 class="gold-text" style="font-size: 0.95rem; margin-bottom: 0.8rem; font-weight: 600;"><i class="fa-solid fa-code-commit" style="margin-right: 8px;"></i> Currently Learning / Building:</h4>
+                            <ul style="list-style-type: none; padding-left: 0; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-muted); font-size: 0.92rem;">
+                                <li style="display: flex; align-items: flex-start; gap: 8px;"><i class="fa-solid fa-arrow-right gold-text" style="font-size: 0.8rem; margin-top: 5px;"></i> <span>Building Learn2Ride, a full-stack driving-education platform (Next.js, Node.js, MongoDB)</span></li>
+                                <li style="display: flex; align-items: flex-start; gap: 8px;"><i class="fa-solid fa-arrow-right gold-text" style="font-size: 0.8rem; margin-top: 5px;"></i> <span><!-- TODO: specify item 2 -->[ITEM 2]</span></li>
+                                <li style="display: flex; align-items: flex-start; gap: 8px;"><i class="fa-solid fa-arrow-right gold-text" style="font-size: 0.8rem; margin-top: 5px;"></i> <span><!-- TODO: specify item 3 -->[ITEM 3]</span></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="signature" style="margin-top: 1.5rem;">Abhishek Pandey</div>
                     </div>
                     <div class="about-stats">
                         <div class="stat-card glass-card reveal">
-                            <h3>06+</h3>
+                            <h3>07</h3>
                             <p>Projects</p>
                         </div>
                         <div class="stat-card glass-card reveal">
@@ -208,7 +222,7 @@
         <section id="skills" class="skills section">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="subtitle">Excellence</span>
+                    <span class="subtitle">Stack</span>
                     <h2 class="section-title">Technical <span class="gold-text">Stack</span></h2>
                 </div>
                 <div class="skills-container">
@@ -216,10 +230,11 @@
                         <h3><i class="fa-solid fa-display gold-text"></i> Frontend</h3>
                         <div class="skill-tags">
                             <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3 (SCSS)</span>
+                            <span class="skill-tag">CSS3</span>
                             <span class="skill-tag">JavaScript (ES6+)</span>
                             <span class="skill-tag">React.js</span>
                             <span class="skill-tag">Next.js</span>
+                            <span class="skill-tag">Tailwind CSS</span>
                         </div>
                     </div>
                     <div class="skill-category glass-card reveal">
@@ -228,12 +243,15 @@
                             <span class="skill-tag">Node.js</span>
                             <span class="skill-tag">Express.js</span>
                             <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">Python (Flask)</span>
                         </div>
                     </div>
                     <div class="skill-category glass-card reveal">
                         <h3><i class="fa-solid fa-database gold-text"></i> Database</h3>
                         <div class="skill-tags">
                             <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Firebase</span>
                         </div>
                     </div>
                     <div class="skill-category glass-card reveal">
@@ -246,11 +264,15 @@
                         </div>
                     </div>
                     <div class="skill-category glass-card reveal">
-                        <h3><i class="fa-solid fa-screwdriver-wrench gold-text"></i> Tools</h3>
+                        <h3><i class="fa-solid fa-screwdriver-wrench gold-text"></i> Tools &amp; AI</h3>
                         <div class="skill-tags">
                             <span class="skill-tag">Git</span>
                             <span class="skill-tag">GitHub</span>
                             <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Cursor</span>
+                            <span class="skill-tag">Kaggle</span>
+                            <span class="skill-tag">Antigravity</span>
+                            <span class="skill-tag">Gemini Pro API</span>
                         </div>
                     </div>
                 </div>
@@ -273,31 +295,31 @@
                                 <span class="project-badge">Full-Stack Platform</span>
                                 <div class="building-badge">
                                     <span class="dot-pulse"></span>
-                                    Flagship Project
+                                    In Progress
                                 </div>
                             </div>
                             <h3>Learn2Ride Platform</h3>
-                            <p>Learn2Ride is an innovative web platform that reimagines driving education by connecting learners with verified trainers in a secure digital ecosystem. With features like trainer verification, booking management, and streamlined user interaction, it provides a modern solution for skill-based learning. The project reflects practical problem-solving, thoughtful UI design, and scalable web development concepts.</p>
+                            <p>Learn2Ride is a full-stack driving-education platform designed to connect learners with verified instructors. The application focuses on trainer verification, booking management, and responsive user experience using modern web technologies.</p>
                             <div class="project-tech" style="margin-bottom: 1.5rem;">
                                 <span>Next.js</span><span>Tailwind CSS</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span>
                             </div>
                             <div class="project-cta">
-                                <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">View Project <i class="fa-solid fa-arrow-right-long"></i></a>
+                                <span class="link-btn disabled-btn" title="Project currently in active development"><i class="fa-solid fa-clock"></i> Coming Soon</span>
                                 <button class="btn-diag link-btn" id="btn-diagnostics" aria-expanded="false"><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> SYS_ANALYSIS</button>
                             </div>
                             <!-- Expandable Diagnostics/Case Study Panel -->
                             <div class="diagnostics-panel" id="diagnostics-panel" aria-hidden="true">
-                                <div class="diag-header"><i class="fa-solid fa-terminal text-gold" style="color: var(--gold); margin-right: 5px;"></i> Learn2Ride Architecture Metrics</div>
+                                <div class="diag-header"><i class="fa-solid fa-terminal text-gold" style="color: var(--gold); margin-right: 5px;"></i> Learn2Ride Architecture &amp; Progress</div>
                                 <div class="diag-body">
-                                    <p><strong>🚨 The Challenge:</strong> Traditional driving school systems suffer from high friction booking, zero real-time trainer verification, and offline coordination vulnerabilities.</p>
-                                    <p><strong>🛠️ Solution Decisions:</strong> Engineered a highly responsive frontend connecting verified trainers using REST API endpoints. Added reactive calendar management for seamless session coordination.</p>
-                                    <p><strong>⚡ Tech Wins:</strong> Reduced schedule matching times by 65%. Zero external SQL calls per session list render. Clean UI with fully accessible layouts.</p>
+                                    <p><strong>🚨 The Challenge:</strong> Traditional driving school systems suffer from high friction booking, lack of verified trainer validation, and manual scheduling coordination.</p>
+                                    <p><strong>🛠️ Solution Decisions:</strong> Developing a modern web architecture connecting verified trainers with learners via secure REST APIs, reactive booking calendar, and clean user dashboard.</p>
+                                    <p><strong>⚡ Features Planned / Built So Far:</strong> Trainer verification flow, booking management, REST APIs with Express.js, MongoDB for storage, responsive Next.js + Tailwind frontend.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="project-visual">
                             <div class="visual-placeholder gold-glow">
-                                <span><img src="./image/WebLogo.png" alt="Learn2Ride Logo"></span>
+                                <span><img src="./image/WebLogo.png" alt="Learn2Ride Platform" width="300" height="300" loading="lazy"></span>
                             </div>
                         </div>
                     </div>
@@ -313,33 +335,35 @@
                             <span>HTML</span><span>CSS</span><span>JavaScript</span>
                         </div>
                         <div class="project-cta">
-                            <a href="https://abhishek250805.github.io/calculator/" target="_blank" rel="noopener noreferrer" class="link-btn">use it <i class="fa-solid fa-arrow-right-long"></i></a>
-                            <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub <i class="fa-brands fa-github"></i></a>
+                            <a href="https://abhishek250805.github.io/calculator/" target="_blank" rel="noopener noreferrer" class="link-btn">Live Demo <i class="fa-solid fa-arrow-right-long"></i></a>
+                            <!-- TODO: replace with the AURA-Calc repo URL -->
+                            <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn"><i class="fa-brands fa-github"></i> GitHub</a>
                         </div>
                         <div class="project-visual" style="margin-top: 1.5rem;">
                             <div class="visual-placeholder gold-glow">
-                                <span><img src="./image/AURA-Calc.png" alt="AURA-Calc Interface"></span>
+                                <span><img src="./image/AURA-Calc.png" alt="AURA-Calc Interface" width="400" height="250" loading="lazy"></span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Featured Project 3: Personal Portfolio -->
+                    <!-- SWAPPABLE PROJECT CARD: Portfolio v2 (can be swapped for future projects) -->
+                    <!-- Featured Project 3: Portfolio v2 -->
                     <div class="project-card glass-card reveal" data-category="frontend">
                         <div class="project-header-meta">
                             <span class="project-badge">Professional UI</span>
                         </div>
-                        <h3>Personal Portfolio Website</h3>
-                        <p>A high-performance, responsive presentation environment engineered to highlight technical stacks, academic milestones, and development projects.</p>
+                        <h3>Portfolio v2</h3>
+                        <p>A responsive personal portfolio website engineered with HTML, CSS, and JavaScript to showcase academic milestones, technical stack, and full-stack projects.</p>
                         <div class="project-tech" style="margin-bottom: 1.5rem;">
                             <span>HTML</span><span>CSS</span><span>JavaScript</span>
                         </div>
                         <div class="project-cta">
-                            <a href="index.html" class="link-btn">Explore Site <i class="fa-solid fa-arrow-right-long"></i></a>
-                            <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" class="link-btn">GitHub <i class="fa-brands fa-github"></i></a>
+                            <a href="index.html" class="link-btn">Live Site <i class="fa-solid fa-arrow-right-long"></i></a>
+                            <a href="https://github.com/Abhishek250805/Portfolio" target="_blank" rel="noopener noreferrer" class="link-btn"><i class="fa-brands fa-github"></i> GitHub</a>
                         </div>
                         <div class="project-visual" style="margin-top: 1.5rem;">
                             <div class="visual-placeholder gold-glow">
-                                <span><img src="image/Logo.png" alt="Portfolio Watermark" style="object-fit: contain;"></span>
+                                <span><img src="image/Logo.png" alt="Portfolio v2 Preview" style="object-fit: contain;" width="300" height="200" loading="lazy"></span>
                             </div>
                         </div>
                     </div>
@@ -358,12 +382,38 @@
                     <span class="subtitle">Academics</span>
                     <h2 class="section-title">Education <span class="gold-text">&amp; Certifications</span></h2>
                 </div>
-                <div class="education-grid" style="margin-bottom: 3.5rem;">
-                    <div class="education-card glass-card reveal" style="grid-column: 1 / -1;">
+                <div class="education-grid" style="margin-bottom: 3.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- MCA Entry (Pursuing) -->
+                    <div class="education-card glass-card reveal">
                         <div class="education-header">
                             <i class="fa-solid fa-graduation-cap gold-text"></i>
                             <div>
-                                <h3>Bachelor of Computer Applications</h3>
+                                <h3>Master of Computer Applications (MCA)</h3>
+                                <p class="school">Swami Vivekanand Subharti University, Meerut, Uttar Pradesh</p>
+                            </div>
+                        </div>
+                        <div class="education-details">
+                            <div class="detail-item">
+                                <span class="label">Duration:</span>
+                                <span class="value gold-text">2026 – 2028</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Status:</span>
+                                <span class="value gold-text">Pursuing</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Location:</span>
+                                <span class="value">Meerut, Uttar Pradesh</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BCA Entry (Completed) -->
+                    <div class="education-card glass-card reveal">
+                        <div class="education-header">
+                            <i class="fa-solid fa-graduation-cap gold-text"></i>
+                            <div>
+                                <h3>Bachelor of Computer Applications (BCA)</h3>
                                 <p class="school">School of Management Sciences</p>
                             </div>
                         </div>
@@ -371,6 +421,10 @@
                             <div class="detail-item">
                                 <span class="label">Duration:</span>
                                 <span class="value gold-text">2023 – 2026</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Status:</span>
+                                <span class="value gold-text">Completed</span>
                             </div>
                             <div class="detail-item">
                                 <span class="label">Academic CGPA:</span>
@@ -439,7 +493,12 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2026 Abhishek Pandey. All Rights Reserved.</p>
-                <div class="footer-tag">Crafted with Luxury &amp; Code</div>
+                <div class="footer-social-links" style="display: flex; gap: 1.2rem; align-items: center; justify-content: center; margin: 0.5rem 0;">
+                    <a href="https://www.linkedin.com/in/abhishek-pandey-375656301" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="footer-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Abhishek250805" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="footer-social-link"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:30pandeyabhishek@gmail.com" aria-label="Email Abhishek Pandey" class="footer-social-link"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <div class="footer-tag">Built with HTML, CSS &amp; JavaScript</div>
             </div>
         </div>
     </footer>
